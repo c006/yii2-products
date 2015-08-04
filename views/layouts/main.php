@@ -27,6 +27,8 @@ AppAsset::register($this);
     <link rel="stylesheet" href="/css/site.css?<?= time() ?>"/>
     <!-- Layout -->
     <link rel="stylesheet" href="/css/layout.css?<?= time() ?>"/>
+    <!-- Products -->
+    <link rel="stylesheet" href="/css/products.css?<?= time() ?>"/>
 
     <?php $this->head() ?>
 </head>
@@ -49,7 +51,7 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
+        <?= \c006\alerts\Alerts::widget() ?>
         <?= $content ?>
     </div>
 </div>

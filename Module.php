@@ -24,9 +24,6 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-
-
-        Yii::$app->session->set('C006_LOGIN_PATH', $this->loginPath);
     }
 
 

@@ -2,7 +2,6 @@
 
 namespace c006\products\controllers;
 
-
 use c006\products\assets\ProdHelpers;
 
 use Yii;
@@ -17,19 +16,20 @@ use yii\filters\VerbFilter;
  */
 class ProductCategoryController extends Controller
 {
-	
-	function init() {
-		$this->layout = '@c006/products/views/layouts/main';
+
+    function init()
+    {
+        $this->layout = '@c006/products/views/layouts/main';
         if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
             return $this->redirect('/user');
         }
-	}
-	
+    }
+
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -47,14 +47,16 @@ class ProductCategoryController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
      * Displays a single ProductCategory model.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -85,7 +87,9 @@ class ProductCategoryController extends Controller
     /**
      * Updates an existing ProductCategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -104,7 +108,9 @@ class ProductCategoryController extends Controller
     /**
      * Deletes an existing ProductCategory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -117,16 +123,49 @@ class ProductCategoryController extends Controller
     /**
      * Finds the ProductCategory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return ProductCategory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProductCategory::findOne($id)) !== null) {
+        if (($model = ProductCategory::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+
+    public function actionAll()
+    {
+        $array = [];
+        $array[] = [
+//            'id'       => 1,
+//            'text'     => 'Home',
+//            'a_attr'     => [
+//                'item_id' => '1',
+//            ],
+//            'children' => [
+//                ['id'   => 2,
+//                 'text' => 'Node'
+//                ],
+//                ['id'   => 3,
+//                 'text' => 'Node 2'
+//                ],
+//            ]
+        ];
+
+        return json_encode($array);
+    }
+
+
+    public function actionPost() {
+        if (isset($_POST)) {
+            $id = (isset($_POST['id'])) ? $_POST['id'] : 0;
+
         }
     }
 }

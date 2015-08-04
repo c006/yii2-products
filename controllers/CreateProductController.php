@@ -2,17 +2,13 @@
 
 namespace c006\products\controllers;
 
-use c006\alerts\Alerts;
-use c006\email\EmailTemplates;
-use c006\products\models\Products;
+use c006\products\models\Product;
+use c006\products\models\ProductType;
 use c006\user\models\form\Login as LoginForm;
 use c006\user\models\form\PasswordResetRequest as PasswordResetRequestForm;
-use c006\user\models\form\Preferences;
 use c006\user\models\form\ResetPassword as ResetPasswordForm;
 use c006\user\models\form\Signup as SignupForm;
 use c006\user\models\User;
-use common\assets\AppHelpers;
-use common\assets\AssetExtrasJs;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
@@ -61,7 +57,18 @@ class CreateProductController extends Controller
     public function actionIndex()
     {
 
-        $model = new Products();
+        $model = new Product();
+
+        if (isset($_POST['Product'])) {
+            $model->product_type_id = $_POST['Product']['product_type_id'];
+
+            $model_product_type = ProductType::find()
+                ->where(['id' => $model->product_type_id])
+                ->asArray()
+                ->one();
+
+            return $this->render('choose-type-attr', ['model' => $model, 'model_product_type' => $model_product_type]);
+        }
 
         return $this->render('choose-type', ['model' => $model]);
 

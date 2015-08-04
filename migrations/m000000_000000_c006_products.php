@@ -315,6 +315,7 @@ class m000000_000000_c006_products extends Migration
             }
         }
 
+
         $this->createIndex('idx_product_type_id_000', 'product', 'product_type_id', 0);
         $this->createIndex('idx_UNIQUE_name_001', 'product_attr', 'name', 1);
         $this->createIndex('idx_attr_type_id_002', 'product_attr', 'attr_type_id', 0);

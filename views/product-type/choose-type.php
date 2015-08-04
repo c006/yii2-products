@@ -4,7 +4,7 @@ use c006\activeForm\ActiveForm;
 use c006\products\models\ProductType;
 use yii\bootstrap\Html;
 
-$types = \c006\products\models\ProductType::find()->orderBy('name')->all();
+$types = \c006\products\models\ProductCoreType::find()->orderBy('data')->all();
 
 ?>
 
@@ -16,7 +16,7 @@ $types = \c006\products\models\ProductType::find()->orderBy('name')->all();
     <div class="form">
         <?php $form = ActiveForm::begin(['id' => 'form-submit']); ?>
 
-        <?php echo $form->field($model, 'product_type_id')->dropDownList(\yii\helpers\ArrayHelper::map($types, 'id', 'name'))->label('Choose Product Type'); ?>
+        <?php echo $form->field($model, 'product_core_type_id')->dropDownList(\yii\helpers\ArrayHelper::map($types, 'id', 'data'))->label('Choose Product Type'); ?>
 
         <div class="form-group">
             <?= Html::submitButton('Continue', ['class' => 'btn btn-primary', 'name' => 'button-submit']) ?>
