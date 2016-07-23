@@ -19,7 +19,7 @@ class ProductCoreType extends ProductCoreTypeModel
     {
         return [
             [['id'], 'integer'],
-            [['data'], 'safe'],
+            [['value'], 'safe'],
         ];
     }
 
@@ -59,7 +59,7 @@ class ProductCoreType extends ProductCoreTypeModel
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'data', $this->data]);
+        $query->andFilterWhere(['like', 'value', $this->data]);
 
         return $dataProvider;
     }

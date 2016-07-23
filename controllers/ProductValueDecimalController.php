@@ -19,7 +19,7 @@ class ProductValueDecimalController extends Controller
 {
 	
 	function init() {
-		$this->layout = '@c006/products/views/layouts/main';
+		//$this->layout = '@c006/products/views/layouts/main';
         if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
             return $this->redirect('/user');
         }

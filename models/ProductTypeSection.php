@@ -34,7 +34,6 @@ class ProductTypeSection extends \yii\db\ActiveRecord
             [['product_type_id', 'name', 'position'], 'required'],
             [['product_type_id', 'position'], 'integer'],
             [['name'], 'string', 'max' => 45],
-            [['name'], 'unique'],
             [['product_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductType::className(), 'targetAttribute' => ['product_type_id'=>'id']],
         ];
     }

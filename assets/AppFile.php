@@ -103,9 +103,9 @@ class AppFile
     public static function  fileFromPath($path)
     {
         $path = str_replace('\\', '/', $path);
-        $f    = explode('/', $path);
+        $f = explode('/', $path);
 
-        return $f[sizeof($f) - 1];
+        return $f[ sizeof($f) - 1 ];
     }
 
     /**
@@ -115,10 +115,10 @@ class AppFile
      */
     public static function getLastFolderInPath($path)
     {
-        $path  = AppFile::cleanBackslashInPath($path);
+        $path = AppFile::cleanBackslashInPath($path);
         $array = explode('/', $path);
 
-        return $array[sizeof($array) - 1];
+        return $array[ sizeof($array) - 1 ];
     }
 
     /**
@@ -195,7 +195,7 @@ class AppFile
     {
         $f = explode('.', $file_name);
 
-        return strtolower($f[sizeof($f) - 1]);
+        return strtolower($f[ sizeof($f) - 1 ]);
     }
 
     /**
@@ -242,14 +242,18 @@ class AppFile
     public static function writeFile($filePath, $data)
     {
         @unlink($filePath);
-        $fh = fopen($filePath, 'w') or die("can't open file");
-        fwrite($fh, $data);
+        $fh = fopen($filePath, 'w+') or die("can't open file");
+
+       // print_r(explode(PHP_EOL, $data)); exit;
+        foreach (explode(PHP_EOL, $data) as $line) {
+            fwrite($fh, $line . PHP_EOL, 1024);
+        }
         fclose($fh);
     }
 
     public static function cleanFileName($file)
     {
-        $ext  = self::fileExtension($file);
+        $ext = self::fileExtension($file);
         $file = self::removeFileExtension($file);
         $file = preg_replace('/[^0-9|A-Z|a-z|_|-]/', '', $file);
 
@@ -264,7 +268,7 @@ class AppFile
     public static function  removeFileExtension($file_name)
     {
         $f = explode('.', $file_name);
-        unset($f[sizeof($f) - 1]);
+        unset($f[ sizeof($f) - 1 ]);
 
         return implode('.', $f);
     }
@@ -277,10 +281,10 @@ class AppFile
 
     public static function buildPath($path)
     {
-        $dirs      = '';
+        $dirs = '';
         $base_path = AppFile::getBasePath();
-        $path      = AppFile::cleanBackslashInPath($path);
-        $path      = str_replace($base_path, '', $path);
+        $path = AppFile::cleanBackslashInPath($path);
+        $path = str_replace($base_path, '', $path);
         foreach (explode('/', $path) as $dir) {
             if (!$dir)
                 continue;

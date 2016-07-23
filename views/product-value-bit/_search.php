@@ -21,7 +21,7 @@ use c006\activeForm\ActiveForm;
 
     <?= $form->field($model, 'product_id') ?>
 
-    <?= $form->field($model, 'data') ?>
+    <?= $form->field($model, 'value') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

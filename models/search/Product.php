@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\Product as ProductModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\Product as ProductModel;
 
 /**
  * Product represents the model behind the search form about `c006\products\models\Product`.
@@ -18,7 +18,8 @@ class Product extends ProductModel
     public function rules()
     {
         return [
-            [['id', 'store_id', 'product_type_id', 'position'], 'integer'],
+            [['id', 'store_id', 'position'], 'integer'],
+            [['product_type_id'], 'safe'],
         ];
     }
 
@@ -47,6 +48,7 @@ class Product extends ProductModel
         ]);
 
         $this->load($params);
+        $query->joinWith('productType');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -55,11 +57,11 @@ class Product extends ProductModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'       => $this->id,
             'store_id' => $this->store_id,
-            'product_type_id' => $this->product_type_id,
             'position' => $this->position,
         ]);
+        $query->andFilterWhere(['like', 'product_type.name', $this->product_type_id]);
 
         return $dataProvider;
     }

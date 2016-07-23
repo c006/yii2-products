@@ -9,8 +9,9 @@ use Yii;
  *
  * @property integer $id
  * @property integer $product_id
- * @property integer $symbolic_url_id
+ * @property integer $alias_url_id
  * @property integer $attr_id
+ * @property string $value
  *
  * @property Product $product
  */
@@ -30,9 +31,9 @@ class ProductValueUrl extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'symbolic_url_id'], 'required'],
-            [['product_id', 'symbolic_url_id', 'attr_id'], 'integer'],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id'=>'id']],
+            [['product_id', 'alias_url_id', 'value'], 'required'],
+            [['product_id', 'alias_url_id', 'attr_id'], 'integer'],
+            [['value'], 'string', 'max' => 100]
         ];
     }
 
@@ -44,8 +45,9 @@ class ProductValueUrl extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'product_id' => Yii::t('app', 'Product ID'),
-            'symbolic_url_id' => Yii::t('app', 'Symbolic Url ID'),
+            'alias_url_id' => Yii::t('app', 'Alias Url ID'),
             'attr_id' => Yii::t('app', 'Attr ID'),
+            'value' => Yii::t('app', 'Value'),
         ];
     }
 

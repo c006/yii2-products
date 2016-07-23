@@ -18,7 +18,7 @@ class ProductValueInteger extends ProductValueIntegerModel
     public function rules()
     {
         return [
-            [['id', 'product_id', 'attr_id', 'data'], 'integer'],
+            [['id', 'product_id', 'attr_id', 'value'], 'integer'],
         ];
     }
 
@@ -58,7 +58,7 @@ class ProductValueInteger extends ProductValueIntegerModel
             'id' => $this->id,
             'product_id' => $this->product_id,
             'attr_id' => $this->attr_id,
-            'data' => $this->data,
+            'value' => $this->data,
         ]);
 
         return $dataProvider;

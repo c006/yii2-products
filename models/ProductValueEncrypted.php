@@ -31,9 +31,9 @@ class ProductValueEncrypted extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'attr_id', 'data'], 'required'],
+            [['product_id', 'attr_id', 'value'], 'required'],
             [['product_id', 'attr_id'], 'integer'],
-            [['data'], 'string', 'max' => 32],
+            [['value'], 'string', 'max' => 32],
             [['attr_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductAttr::className(), 'targetAttribute' => ['attr_id'=>'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id'=>'id']],
         ];
@@ -48,7 +48,7 @@ class ProductValueEncrypted extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'product_id' => Yii::t('app', 'Product ID'),
             'attr_id' => Yii::t('app', 'Attr ID'),
-            'data' => Yii::t('app', 'Data'),
+            'value' => Yii::t('app', 'Data'),
         ];
     }
 

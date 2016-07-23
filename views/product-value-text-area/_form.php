@@ -15,15 +15,15 @@ use c006\activeForm\ActiveForm;
 
         <?
  		$model_link = \c006\products\models\Product::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'data');
+		$model_link = ArrayHelper::map($model_link, 'id', 'value');
 		echo $form->field($model, 'product_id')->dropDownList($model_link)->label('Product') ?>
 
     <?
  		$model_link = \c006\products\models\ProductAttr::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'data');
+		$model_link = ArrayHelper::map($model_link, 'id', 'value');
 		echo $form->field($model, 'attr_id')->dropDownList($model_link)->label('Product Attr') ?>
 
-    <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

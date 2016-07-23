@@ -15,12 +15,12 @@ use c006\activeForm\ActiveForm;
 
         <?
  		$model_link = \c006\products\models\ProductStore::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'data');
+		$model_link = ArrayHelper::map($model_link, 'id', 'value');
 		echo $form->field($model, 'store_id')->dropDownList($model_link)->label('Product Store') ?>
 
     <?
  		$model_link = \c006\products\models\ProductType::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'data');
+		$model_link = ArrayHelper::map($model_link, 'id', 'value');
 		echo $form->field($model, 'product_type_id')->dropDownList($model_link)->label('Product Type') ?>
 
     <?= $form->field($model, 'position')->textInput() ?>

@@ -30,6 +30,10 @@ AppAsset::register($this);
     <!-- Products -->
     <link rel="stylesheet" href="/css/products.css?<?= time() ?>"/>
 
+
+
+    <link rel="stylesheet" href="/css/c006-widget-sortable-list.css?<?= time() ?>"/>
+
     <?php $this->head() ?>
 </head>
 <body>
@@ -42,12 +46,6 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
-        <?php
-        NavBar::begin(ProductsMenu::mainInit());
-        echo Nav::widget(ProductsMenu::mainItems());
-        NavBar::end();
-        ?>
-
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

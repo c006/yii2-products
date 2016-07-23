@@ -1,6 +1,8 @@
 <?php
 
 namespace c006\products;
+use c006\core\assets\CoreHelper;
+use common\assets\AppHelpers;
 use Yii;
 
 /**
@@ -24,6 +26,8 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
+
+
     }
 
 

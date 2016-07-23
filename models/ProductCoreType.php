@@ -29,9 +29,9 @@ class ProductCoreType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['data'], 'required'],
-            [['data'], 'string', 'max' => 100],
-            [['data'], 'unique'],
+            [['value'], 'required'],
+            [['value'], 'string', 'max' => 100],
+            [['value'], 'unique'],
         ];
     }
 
@@ -42,7 +42,7 @@ class ProductCoreType extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'data' => Yii::t('app', 'Data'),
+            'value' => Yii::t('app', 'Data'),
         ];
     }
 

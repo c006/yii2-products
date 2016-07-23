@@ -1,17 +1,18 @@
 <?php
 
 use c006\activeForm\ActiveForm;
-use c006\products\models\ProductType;
 use yii\bootstrap\Html;
 
 $types = \c006\products\models\ProductType::find()->orderBy('name')->all();
 
+
+$this->title = Yii::t('app', 'Add Product');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<div id="add-product-container">
 
-<div id="content">
-
-    <div class="title-large"></div>
+    <h1 class="title-large"><?= Html::encode($this->title) ?></h1>
 
     <div class="form">
         <?php $form = ActiveForm::begin(['id' => 'form-submit']); ?>

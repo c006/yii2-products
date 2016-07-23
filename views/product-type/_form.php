@@ -1,11 +1,11 @@
 <?php
 
+use c006\activeForm\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use c006\activeForm\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $modelc006\products\models\ProductType*/
+/* @var $model c006\products\models\ProductType */
 /* @var $form c006\activeForm\ActiveForm; */
 ?>
 
@@ -13,14 +13,14 @@ use c006\activeForm\ActiveForm;
 
     <?php $form = ActiveForm::begin([]); ?>
 
-        <?
- 		$model_link = \c006\products\models\ProductCoreType::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'data');
-		echo $form->field($model, 'product_core_type_id')->dropDownList($model_link)->label('Product Core Type') ?>
+    <?
+    $model_link = \c006\products\models\ProductCoreType::find()->all();
+    $model_link = ArrayHelper::map($model_link, 'id', 'value');
+    echo $form->field($model, 'product_core_type_id')->dropDownList($model_link)->label('Product Core Type') ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => TRUE]) ?>
 
-    <?= $form->field($model, 'is_viewable')->dropDownList(['No','Yes']) ?>
+    <?= $form->field($model, 'is_viewable')->dropDownList(['No', 'Yes']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

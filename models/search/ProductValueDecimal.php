@@ -19,7 +19,7 @@ class ProductValueDecimal extends ProductValueDecimalModel
     {
         return [
             [['id', 'product_id', 'attr_id'], 'integer'],
-            [['data'], 'number'],
+            [['value'], 'number'],
         ];
     }
 
@@ -59,7 +59,7 @@ class ProductValueDecimal extends ProductValueDecimalModel
             'id' => $this->id,
             'product_id' => $this->product_id,
             'attr_id' => $this->attr_id,
-            'data' => $this->data,
+            'value' => $this->data,
         ]);
 
         return $dataProvider;

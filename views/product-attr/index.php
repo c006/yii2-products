@@ -1,13 +1,13 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel c006\products\models\search\ProductAttr */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Product Attrs');
+$this->title                   = Yii::t('app', 'Product Attrs');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-attr-index">
@@ -20,24 +20,26 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            'dataProvider' => $dataProvider,
+            'filterModel'  => $searchModel,
+            'columns'      => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'attr_type_id',
-            'label',
-            'name',
-            'default_value:ntext',
-            // 'is_unique_value',
-            // 'css_style',
-            // 'hint:ntext',
-            // 'is_core',
-            // 'is_required',
+                    'id',
+                    'attr_type_id',
+                    'label',
+                    'name',
+                    'default_value:ntext',
+                    // 'is_unique_value',
+                    // 'css_style',
+                    // 'hint:ntext',
+                    // 'is_core',
+                    // 'is_required',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+                    ['class'    => 'yii\grid\ActionColumn',
+                     'template' => '<span class="nowrap">{update} {delete}</span>',
+                    ],
+            ],
     ]); ?>
 
 </div>

@@ -31,8 +31,8 @@ class ProductValueBit extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['attr_id', 'product_id', 'data'], 'required'],
-            [['attr_id', 'product_id', 'data'], 'integer'],
+            [['attr_id', 'product_id', 'value'], 'required'],
+            [['attr_id', 'product_id', 'value'], 'integer'],
             [['attr_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductAttr::className(), 'targetAttribute' => ['attr_id'=>'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id'=>'id']],
         ];
@@ -47,7 +47,7 @@ class ProductValueBit extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'attr_id' => Yii::t('app', 'Attr ID'),
             'product_id' => Yii::t('app', 'Product ID'),
-            'data' => Yii::t('app', 'Data'),
+            'value' => Yii::t('app', 'Data'),
         ];
     }
 

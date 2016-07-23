@@ -7,25 +7,25 @@ use Yii;
 /**
  * This is the model class for table "product".
  *
- * @property integer $id
- * @property integer $store_id
- * @property integer $product_type_id
- * @property integer $position
+ * @property integer                    $id
+ * @property integer                    $store_id
+ * @property integer                    $product_type_id
+ * @property integer                    $position
  *
- * @property ProductType $productType
- * @property ProductCategory[] $productCategories
- * @property ProductGroups[] $productGroups
- * @property ProductImage[] $productImages
- * @property ProductKeyword[] $productKeywords
+ * @property ProductType                $productType
+ * @property ProductCategory[]          $productCategories
+ * @property ProductGroups[]            $productGroups
+ * @property ProductImage[]             $productImages
+ * @property ProductKeyword[]           $productKeywords
  * @property ProductShippingPackaging[] $productShippingPackagings
- * @property ProductTag[] $productTags
- * @property ProductValueBit[] $productValueBits
- * @property ProductValueDecimal[] $productValueDecimals
- * @property ProductValueEncrypted[] $productValueEncrypteds
- * @property ProductValueInteger[] $productValueIntegers
- * @property ProductValueText[] $productValueTexts
- * @property ProductValueTextArea[] $productValueTextAreas
- * @property ProductValueUrl[] $productValueUrls
+ * @property ProductTag[]               $productTags
+ * @property ProductValueBit[]          $productValueBits
+ * @property ProductValueDecimal[]      $productValueDecimals
+ * @property ProductValueEncrypted[]    $productValueEncrypteds
+ * @property ProductValueInteger[]      $productValueIntegers
+ * @property ProductValueText[]         $productValueTexts
+ * @property ProductValueTextArea[]     $productValueTextAreas
+ * @property ProductValueUrl[]          $productValueUrls
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -45,7 +45,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['store_id', 'product_type_id'], 'required'],
             [['store_id', 'product_type_id', 'position'], 'integer'],
-            [['product_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductType::className(), 'targetAttribute' => ['product_type_id'=>'id']],
+            [['product_type_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => ProductType::className(), 'targetAttribute' => ['product_type_id' => 'id']],
         ];
     }
 
@@ -55,12 +55,13 @@ class Product extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'store_id' => Yii::t('app', 'Store ID'),
-            'product_type_id' => Yii::t('app', 'Product Type ID'),
-            'position' => Yii::t('app', 'Position'),
+            'id'              => Yii::t('app', 'ID'),
+            'store_id'        => Yii::t('app', 'Store ID'),
+            'product_type_id' => Yii::t('app', 'Product Type'),
+            'position'        => Yii::t('app', 'Position'),
         ];
     }
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -68,6 +69,15 @@ class Product extends \yii\db\ActiveRecord
     public function getProductType()
     {
         return $this->hasOne(ProductType::className(), ['id' => 'product_type_id']);
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductTypeSection()
+    {
+        return $this->hasMany(ProductTypeSection::className(), ['product_type_id' => 'product_type_id']);
     }
 
     /**
@@ -117,6 +127,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProductTag::className(), ['product_id' => 'id']);
     }
+
 
     /**
      * @return \yii\db\ActiveQuery

@@ -26,7 +26,7 @@ class ProductTypeController extends Controller
 
     function init()
     {
-        $this->layout = '@c006/products/views/layouts/main';
+        //$this->layout = '@c006/products/views/layouts/main';
         if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
             return $this->redirect('/user');
         }
@@ -126,9 +126,6 @@ class ProductTypeController extends Controller
 
         if (isset($_POST['Sections'])) {
 
-
-
-
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 $model->save();
                 AttrHelper::updateAttributeSections($_POST['Sections'], $model->id);
@@ -139,6 +136,10 @@ class ProductTypeController extends Controller
                 Alerts::setCountdown(4);
 
                 return $this->redirect(['index']);
+            } else {
+                Alerts::setMessage('Error, please try again');
+                Alerts::setAlertType(Alerts::ALERT_DANGER);
+                Alerts::setCountdown(4);
             }
         }
 

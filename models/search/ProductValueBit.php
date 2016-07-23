@@ -18,7 +18,7 @@ class ProductValueBit extends ProductValueBitModel
     public function rules()
     {
         return [
-            [['id', 'attr_id', 'product_id', 'data'], 'integer'],
+            [['id', 'attr_id', 'product_id', 'value'], 'integer'],
         ];
     }
 
@@ -58,7 +58,7 @@ class ProductValueBit extends ProductValueBitModel
             'id' => $this->id,
             'attr_id' => $this->attr_id,
             'product_id' => $this->product_id,
-            'data' => $this->data,
+            'value' => $this->data,
         ]);
 
         return $dataProvider;

@@ -3,6 +3,7 @@
 namespace c006\products\controllers;
 
 
+use c006\products\assets\ImageHelper;
 use c006\products\assets\ProdHelpers;
 
 use Yii;
@@ -19,7 +20,7 @@ class ProductImageController extends Controller
 {
 	
 	function init() {
-		$this->layout = '@c006/products/views/layouts/main';
+		//$this->layout = '@c006/products/views/layouts/main';
         if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
             return $this->redirect('/user');
         }
@@ -109,7 +110,12 @@ class ProductImageController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $image = new ImageHelper();
+        $image->imageDelete($id);
+
+        if (Yii::$app->request->post('url', 0)) {
+            return $this->redirect(Yii::$app->request->post('url'));
+        }
 
         return $this->redirect(['index']);
     }

@@ -15,17 +15,17 @@ use c006\activeForm\ActiveForm;
 
         <?
  		$model_link = \c006\products\models\Product::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'data');
+		$model_link = ArrayHelper::map($model_link, 'id', 'value');
 		echo $form->field($model, 'product_id')->dropDownList($model_link)->label('Product') ?>
 
     <?
  		$model_link = \c006\products\models\ProductSymbolicUrl::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'data');
+		$model_link = ArrayHelper::map($model_link, 'id', 'value');
 		echo $form->field($model, 'symbolic_url_id')->dropDownList($model_link)->label('Product Symbolic Url') ?>
 
     <?
  		$model_link = \c006\products\models\ProductAttr::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'data');
+		$model_link = ArrayHelper::map($model_link, 'id', 'value');
 		echo $form->field($model, 'attr_id')->dropDownList($model_link)->label('Product Attr') ?>
 
     <div class="form-group">

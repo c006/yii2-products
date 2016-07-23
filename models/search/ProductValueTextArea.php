@@ -19,7 +19,7 @@ class ProductValueTextArea extends ProductValueTextAreaModel
     {
         return [
             [['id', 'product_id', 'attr_id'], 'integer'],
-            [['data'], 'safe'],
+            [['value'], 'safe'],
         ];
     }
 
@@ -61,7 +61,7 @@ class ProductValueTextArea extends ProductValueTextAreaModel
             'attr_id' => $this->attr_id,
         ]);
 
-        $query->andFilterWhere(['like', 'data', $this->data]);
+        $query->andFilterWhere(['like', 'value', $this->data]);
 
         return $dataProvider;
     }
