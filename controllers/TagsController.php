@@ -2,34 +2,33 @@
 
 namespace c006\products\controllers;
 
-
 use c006\products\assets\ProdHelpers;
-
-use Yii;
-use c006\products\models\Tags;
 use c006\products\models\search\Tags as TagsSearch;
+use c006\products\models\Tags;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * TagsController implements the CRUD actions for Tags model.
  */
 class TagsController extends Controller
 {
-	
-	function init() {
-		//$this->layout = '@c006/products/views/layouts/main';
+
+    function init()
+    {
+        //$this->layout = '@c006/products/views/layouts/main';
         if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
             return $this->redirect('/user');
         }
-	}
-	
+    }
+
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -43,11 +42,11 @@ class TagsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TagsSearch();
+        $searchModel  = new TagsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -76,6 +75,7 @@ class TagsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->name = ucwords($model->name);
             $model->save();
+
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -97,6 +97,7 @@ class TagsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->name = ucwords($model->name);
             $model->save();
+
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -127,7 +128,7 @@ class TagsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Tags::findOne($id)) !== null) {
+        if (($model = Tags::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

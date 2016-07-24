@@ -2,35 +2,34 @@
 
 namespace c006\products\controllers;
 
-
 use c006\products\assets\ImageHelper;
 use c006\products\assets\ProdHelpers;
-
-use Yii;
 use c006\products\models\ProductImage;
 use c006\products\models\search\ProductImage as ProductImageSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProductImageController implements the CRUD actions for ProductImage model.
  */
 class ProductImageController extends Controller
 {
-	
-	function init() {
-		//$this->layout = '@c006/products/views/layouts/main';
+
+    function init()
+    {
+        //$this->layout = '@c006/products/views/layouts/main';
         if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
             return $this->redirect('/user');
         }
-	}
-	
+    }
+
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -44,11 +43,11 @@ class ProductImageController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductImageSearch();
+        $searchModel  = new ProductImageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -129,7 +128,7 @@ class ProductImageController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ProductImage::findOne($id)) !== null) {
+        if (($model = ProductImage::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

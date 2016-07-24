@@ -1,11 +1,11 @@
 <?php
 
+use c006\activeForm\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use c006\activeForm\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $modelc006\products\models\ProductAttrValue*/
+/* @var $modelc006\products\models\ProductAttrValue */
 /* @var $form c006\activeForm\ActiveForm; */
 ?>
 
@@ -13,14 +13,14 @@ use c006\activeForm\ActiveForm;
 
     <?php $form = ActiveForm::begin([]); ?>
 
-        <?
- 		$model_link = \c006\products\models\ProductAttr::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'value');
-		echo $form->field($model, 'attr_id')->dropDownList($model_link)->label('Product Attr') ?>
+    <?
+    $model_link = \c006\products\models\ProductAttr::find()->all();
+    $model_link = ArrayHelper::map($model_link, 'id', 'value');
+    echo $form->field($model, 'attr_id')->dropDownList($model_link)->label('Product Attr') ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => TRUE]) ?>
 
-    <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'value')->textInput(['maxlength' => TRUE]) ?>
 
     <?= $form->field($model, 'position')->textInput() ?>
 

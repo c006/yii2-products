@@ -25,7 +25,7 @@ class AppFile
      */
     public static function autoLoadClassArray($directory_array)
     {
-        $array_out = array();
+        $array_out = [];
         foreach ($directory_array as $items) {
             foreach ($items as $array) {
                 if (!$array['is_dir'] && $array['extension'] == 'php')
@@ -100,10 +100,10 @@ class AppFile
      *
      * @return mixed
      */
-    public static function  fileFromPath($path)
+    public static function fileFromPath($path)
     {
         $path = str_replace('\\', '/', $path);
-        $f = explode('/', $path);
+        $f    = explode('/', $path);
 
         return $f[ sizeof($f) - 1 ];
     }
@@ -115,7 +115,7 @@ class AppFile
      */
     public static function getLastFolderInPath($path)
     {
-        $path = AppFile::cleanBackslashInPath($path);
+        $path  = AppFile::cleanBackslashInPath($path);
         $array = explode('/', $path);
 
         return $array[ sizeof($array) - 1 ];
@@ -151,34 +151,34 @@ class AppFile
      */
     public static function recursiveDirectory($path, $base_path)
     {
-        $array = array();
+        $array = [];
         if (!is_dir($path))
             die("No Directory: " . $path);
         $items = scandir($path);
         foreach ($items as $item) {
             if ($item != "." && $item != "..") {
                 if (is_file($path . "/" . $item)) {
-                    $array[]['item'] = array(
+                    $array[]['item'] = [
                         'is_dir'    => FALSE,
                         'path'      => $path,
                         'relative'  => str_replace($base_path, '', $path),
                         'file'      => $item,
                         'extension' => AppFile::fileExtension($item),
-                    );
+                    ];
                 }
             }
         }
         foreach ($items as $item) {
             if ($item != "." && $item != "..") {
                 if (is_dir($path . "/" . $item)) {
-                    $array[]['item'] = array(
+                    $array[]['item'] = [
                         'is_dir'      => TRUE,
                         'path'        => $path,
                         'relative'    => str_replace($base_path, '', $path),
                         'folder'      => $item,
                         'depth'       => AppFile::folderCountInPath(str_replace($base_path, '', $path . "/" . $item)),
                         'sub_folders' => AppFile::recursiveDirectory($path . "/" . $item, $base_path),
-                    );
+                    ];
                 }
             }
         }
@@ -191,7 +191,7 @@ class AppFile
      *
      * @return mixed
      */
-    public static function  fileExtension($file_name)
+    public static function fileExtension($file_name)
     {
         $f = explode('.', $file_name);
 
@@ -244,7 +244,7 @@ class AppFile
         @unlink($filePath);
         $fh = fopen($filePath, 'w+') or die("can't open file");
 
-       // print_r(explode(PHP_EOL, $data)); exit;
+        // print_r(explode(PHP_EOL, $data)); exit;
         foreach (explode(PHP_EOL, $data) as $line) {
             fwrite($fh, $line . PHP_EOL, 1024);
         }
@@ -253,7 +253,7 @@ class AppFile
 
     public static function cleanFileName($file)
     {
-        $ext = self::fileExtension($file);
+        $ext  = self::fileExtension($file);
         $file = self::removeFileExtension($file);
         $file = preg_replace('/[^0-9|A-Z|a-z|_|-]/', '', $file);
 
@@ -265,7 +265,7 @@ class AppFile
      *
      * @return string
      */
-    public static function  removeFileExtension($file_name)
+    public static function removeFileExtension($file_name)
     {
         $f = explode('.', $file_name);
         unset($f[ sizeof($f) - 1 ]);
@@ -281,10 +281,10 @@ class AppFile
 
     public static function buildPath($path)
     {
-        $dirs = '';
+        $dirs      = '';
         $base_path = AppFile::getBasePath();
-        $path = AppFile::cleanBackslashInPath($path);
-        $path = str_replace($base_path, '', $path);
+        $path      = AppFile::cleanBackslashInPath($path);
+        $path      = str_replace($base_path, '', $path);
         foreach (explode('/', $path) as $dir) {
             if (!$dir)
                 continue;

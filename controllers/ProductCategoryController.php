@@ -3,13 +3,12 @@
 namespace c006\products\controllers;
 
 use c006\products\assets\ProdHelpers;
-
-use Yii;
 use c006\products\models\ProductCategory;
 use c006\products\models\search\ProductCategory as ProductCategorySearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProductCategoryController implements the CRUD actions for ProductCategory model.
@@ -43,7 +42,7 @@ class ProductCategoryController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductCategorySearch();
+        $searchModel  = new ProductCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -141,7 +140,7 @@ class ProductCategoryController extends Controller
 
     public function actionAll()
     {
-        $array = [];
+        $array   = [];
         $array[] = [
 //            'id'       => 1,
 //            'text'     => 'Home',
@@ -162,7 +161,8 @@ class ProductCategoryController extends Controller
     }
 
 
-    public function actionPost() {
+    public function actionPost()
+    {
         if (isset($_POST)) {
             $id = (isset($_POST['id'])) ? $_POST['id'] : 0;
 

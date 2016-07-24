@@ -3,13 +3,13 @@
 namespace c006\products\controllers;
 
 use c006\products\assets\ModelHelper;
-use c006\products\models\AutoShipLink;
-use Yii;
 use c006\products\models\AutoShip;
+use c006\products\models\AutoShipLink;
 use c006\products\models\search\AutoShip as AutoShipSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * AutoShipController implements the CRUD actions for AutoShip model.

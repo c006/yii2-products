@@ -1,5 +1,4 @@
 <?php
-use yii\bootstrap\Html;
 use yii\helpers\Url;
 
 /** @var  $form  \c006\activeForm\ActiveForm */
@@ -59,7 +58,7 @@ $frontend_url = Yii::$app->params['frontend'] . '/images/products/';
                 .click(function () {
                     var $this = jQuery(this);
                     if (confirm("Delete image?\n\nAny current changes will be lost.") == true) {
-                        var _html = '<form id="delete-image" method="post" action="<?= Yii::$app->urlManager->createUrl(['products/product-image/delete']); ?>&id='+$this.attr('item_id')+'">' +
+                        var _html = '<form id="delete-image" method="post" action="<?= Yii::$app->urlManager->createUrl(['products/product-image/delete']); ?>&id=' + $this.attr('item_id') + '">' +
                             '<input type="hidden" name="url" value="<?= Yii::$app->request->url; ?>" />' +
                             '<input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />' +
                             '</form>';

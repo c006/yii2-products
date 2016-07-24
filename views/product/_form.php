@@ -1,11 +1,11 @@
 <?php
 
+use c006\activeForm\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use c006\activeForm\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $modelc006\products\models\Product*/
+/* @var $modelc006\products\models\Product */
 /* @var $form c006\activeForm\ActiveForm; */
 ?>
 
@@ -13,15 +13,15 @@ use c006\activeForm\ActiveForm;
 
     <?php $form = ActiveForm::begin([]); ?>
 
-        <?
- 		$model_link = \c006\products\models\ProductStore::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'value');
-		echo $form->field($model, 'store_id')->dropDownList($model_link)->label('Product Store') ?>
+    <?
+    $model_link = \c006\products\models\ProductStore::find()->all();
+    $model_link = ArrayHelper::map($model_link, 'id', 'value');
+    echo $form->field($model, 'store_id')->dropDownList($model_link)->label('Product Store') ?>
 
     <?
- 		$model_link = \c006\products\models\ProductType::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'value');
-		echo $form->field($model, 'product_type_id')->dropDownList($model_link)->label('Product Type') ?>
+    $model_link = \c006\products\models\ProductType::find()->all();
+    $model_link = ArrayHelper::map($model_link, 'id', 'value');
+    echo $form->field($model, 'product_type_id')->dropDownList($model_link)->label('Product Type') ?>
 
     <?= $form->field($model, 'position')->textInput() ?>
 

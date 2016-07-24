@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductShippingPackaging as ProductShippingPackagingModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductShippingPackaging as ProductShippingPackagingModel;
 
 /**
  * ProductShippingPackaging represents the model behind the search form about `c006\products\models\ProductShippingPackaging`.
@@ -55,8 +55,8 @@ class ProductShippingPackaging extends ProductShippingPackagingModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
+            'id'                    => $this->id,
+            'product_id'            => $this->product_id,
             'shipping_packaging_id' => $this->shipping_packaging_id,
         ]);
 

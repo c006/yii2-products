@@ -7,13 +7,13 @@ use Yii;
 /**
  * This is the model class for table "product_type".
  *
- * @property integer $id
- * @property integer $product_core_type_id
- * @property string $name
- * @property integer $is_viewable
+ * @property integer              $id
+ * @property integer              $product_core_type_id
+ * @property string               $name
+ * @property integer              $is_viewable
  *
- * @property Product[] $products
- * @property ProductCoreType $productCoreType
+ * @property Product[]            $products
+ * @property ProductCoreType      $productCoreType
  * @property ProductTypeSection[] $productTypeSections
  */
 class ProductType extends \yii\db\ActiveRecord
@@ -36,7 +36,7 @@ class ProductType extends \yii\db\ActiveRecord
             [['product_core_type_id', 'is_viewable'], 'integer'],
             [['name'], 'string', 'max' => 45],
             [['name'], 'unique'],
-            [['product_core_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductCoreType::className(), 'targetAttribute' => ['product_core_type_id'=>'id']],
+            [['product_core_type_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => ProductCoreType::className(), 'targetAttribute' => ['product_core_type_id' => 'id']],
         ];
     }
 
@@ -46,10 +46,10 @@ class ProductType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id'                   => Yii::t('app', 'ID'),
             'product_core_type_id' => Yii::t('app', 'Product Core Type ID'),
-            'name' => Yii::t('app', 'Name'),
-            'is_viewable' => Yii::t('app', 'Is Viewable'),
+            'name'                 => Yii::t('app', 'Name'),
+            'is_viewable'          => Yii::t('app', 'Is Viewable'),
         ];
     }
 

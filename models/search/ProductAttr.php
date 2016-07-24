@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductAttr as ProductAttrModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductAttr as ProductAttrModel;
 
 /**
  * ProductAttr represents the model behind the search form about `c006\products\models\ProductAttr`.
@@ -56,11 +56,11 @@ class ProductAttr extends ProductAttrModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'attr_type_id' => $this->attr_type_id,
+            'id'              => $this->id,
+            'attr_type_id'    => $this->attr_type_id,
             'is_unique_value' => $this->is_unique_value,
-            'is_core' => $this->is_core,
-            'is_required' => $this->is_required,
+            'is_core'         => $this->is_core,
+            'is_required'     => $this->is_required,
         ]);
 
         $query->andFilterWhere(['like', 'label', $this->label])

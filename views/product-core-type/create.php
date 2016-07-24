@@ -2,11 +2,10 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model c006\products\models\ProductCoreType */
 
-$this->title = Yii::t('app', 'Create Product Core Type');
+$this->title                   = Yii::t('app', 'Create Product Core Type');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product Core Types'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

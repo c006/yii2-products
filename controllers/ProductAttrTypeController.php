@@ -2,34 +2,33 @@
 
 namespace c006\products\controllers;
 
-
 use c006\products\assets\ProdHelpers;
-
-use Yii;
 use c006\products\models\ProductAttrType;
 use c006\products\models\search\ProductAttrType as ProductAttrTypeSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProductAttrTypeController implements the CRUD actions for ProductAttrType model.
  */
 class ProductAttrTypeController extends Controller
 {
-	
-	function init() {
-		//$this->layout = '@c006/products/views/layouts/main';
+
+    function init()
+    {
+        //$this->layout = '@c006/products/views/layouts/main';
         if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
             return $this->redirect('/user');
         }
-	}
-	
+    }
+
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -43,11 +42,11 @@ class ProductAttrTypeController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductAttrTypeSearch();
+        $searchModel  = new ProductAttrTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -72,7 +71,6 @@ class ProductAttrTypeController extends Controller
     public function actionCreate()
     {
         $model = new ProductAttrType();
-
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->id]);
@@ -124,7 +122,7 @@ class ProductAttrTypeController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ProductAttrType::findOne($id)) !== null) {
+        if (($model = ProductAttrType::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

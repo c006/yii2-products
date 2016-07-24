@@ -2,11 +2,10 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model c006\products\models\ProductTypeSectionAttr */
 
-$this->title = Yii::t('app', 'Create Product Type Section Attr');
+$this->title                   = Yii::t('app', 'Create Product Type Section Attr');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product Type Section Attrs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

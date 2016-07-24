@@ -1,13 +1,13 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel c006\products\models\search\PriceTier */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Price Tiers');
+$this->title                   = Yii::t('app', 'Price Tiers');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="price-tier-index">

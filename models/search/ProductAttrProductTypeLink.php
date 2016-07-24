@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductAttrProductTypeLink as ProductAttrProductTypeLinkModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductAttrProductTypeLink as ProductAttrProductTypeLinkModel;
 
 /**
  * ProductAttrProductTypeLink represents the model behind the search form about `c006\products\models\ProductAttrProductTypeLink`.
@@ -55,8 +55,8 @@ class ProductAttrProductTypeLink extends ProductAttrProductTypeLinkModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'attr_id' => $this->attr_id,
+            'id'                   => $this->id,
+            'attr_id'              => $this->attr_id,
             'product_core_type_id' => $this->product_core_type_id,
         ]);
 

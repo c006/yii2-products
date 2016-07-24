@@ -7,15 +7,14 @@ use yii\bootstrap\Html;
 
 /** @var  $form  \c006\activeForm\ActiveForm */
 /** @var  $model \c006\products\models\Product */
-/** @var  $model_form  */
+/** @var  $model_form */
 /** @var  $model_product_type \c006\products\models\ProductType */
 /** @var  $product_id int */
 
 /** @var  $sections array */
 $sections = \c006\products\assets\AttrHelper::getSections($model->product_type_id);
 
-
-$this->title = Yii::t('app', 'Add Product');
+$this->title                   = Yii::t('app', 'Add Product');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div id="add-product-categories-container">
@@ -25,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="form">
         <?php $form = ActiveForm::begin(
             ['id'      => 'form-submit',
-             'options' => ['enctype' => 'multipart/form-data']
+             'options' => ['enctype' => 'multipart/form-data'],
             ]); ?>
 
         <?php echo $form->field($model, 'product_type_id')->hide() ?>
@@ -62,7 +61,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php endforeach ?>
             </div>
         </div>
-
 
 
         <?php ActiveForm::end(); ?>

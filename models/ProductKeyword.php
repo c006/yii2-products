@@ -31,7 +31,7 @@ class ProductKeyword extends \yii\db\ActiveRecord
         return [
             [['product_id', 'keyword_id'], 'required'],
             [['product_id', 'keyword_id'], 'integer'],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id'=>'id']],
+            [['product_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
     }
 
@@ -41,7 +41,7 @@ class ProductKeyword extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id'         => Yii::t('app', 'ID'),
             'product_id' => Yii::t('app', 'Product ID'),
             'keyword_id' => Yii::t('app', 'Keyword ID'),
         ];

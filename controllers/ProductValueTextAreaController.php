@@ -2,34 +2,33 @@
 
 namespace c006\products\controllers;
 
-
 use c006\products\assets\ProdHelpers;
-
-use Yii;
 use c006\products\models\ProductValueTextArea;
 use c006\products\models\search\ProductValueTextArea as ProductValueTextAreaSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProductValueTextAreaController implements the CRUD actions for ProductValueTextArea model.
  */
 class ProductValueTextAreaController extends Controller
 {
-	
-	function init() {
-		//$this->layout = '@c006/products/views/layouts/main';
+
+    function init()
+    {
+        //$this->layout = '@c006/products/views/layouts/main';
         if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
             return $this->redirect('/user');
         }
-	}
-	
+    }
+
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -43,11 +42,11 @@ class ProductValueTextAreaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductValueTextAreaSearch();
+        $searchModel  = new ProductValueTextAreaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -123,7 +122,7 @@ class ProductValueTextAreaController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ProductValueTextArea::findOne($id)) !== null) {
+        if (($model = ProductValueTextArea::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

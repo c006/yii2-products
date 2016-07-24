@@ -7,11 +7,11 @@ use Yii;
 /**
  * This is the model class for table "product_attr_product_type_link".
  *
- * @property integer $id
- * @property integer $attr_id
- * @property integer $product_core_type_id
+ * @property integer         $id
+ * @property integer         $attr_id
+ * @property integer         $product_core_type_id
  *
- * @property ProductAttr $attr
+ * @property ProductAttr     $attr
  * @property ProductCoreType $productCoreType
  */
 class ProductAttrProductTypeLink extends \yii\db\ActiveRecord
@@ -32,8 +32,8 @@ class ProductAttrProductTypeLink extends \yii\db\ActiveRecord
         return [
             [['attr_id', 'product_core_type_id'], 'required'],
             [['attr_id', 'product_core_type_id'], 'integer'],
-            [['attr_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductAttr::className(), 'targetAttribute' => ['attr_id'=>'id']],
-            [['product_core_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductCoreType::className(), 'targetAttribute' => ['product_core_type_id'=>'id']],
+            [['attr_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => ProductAttr::className(), 'targetAttribute' => ['attr_id' => 'id']],
+            [['product_core_type_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => ProductCoreType::className(), 'targetAttribute' => ['product_core_type_id' => 'id']],
         ];
     }
 
@@ -43,8 +43,8 @@ class ProductAttrProductTypeLink extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'attr_id' => Yii::t('app', 'Attr ID'),
+            'id'                   => Yii::t('app', 'ID'),
+            'attr_id'              => Yii::t('app', 'Attr ID'),
             'product_core_type_id' => Yii::t('app', 'Product Core Type ID'),
         ];
     }

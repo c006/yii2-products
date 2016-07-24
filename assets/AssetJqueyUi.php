@@ -14,17 +14,17 @@ class AssetJqueyUi extends AssetBundle
 
     public $basePath = '@webroot';
 
-    public $baseUrl  = '@web';
+    public $baseUrl = '@web';
 
-    public $css      = [
+    public $css = [
         'css/jquery-ui.css',
     ];
 
-    public $js       = [
+    public $js = [
         'js/jquery-ui.js',
     ];
 
-    public $depends  = [];
+    public $depends = [];
 
     /**
      * @var array

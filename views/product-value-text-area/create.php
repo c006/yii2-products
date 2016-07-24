@@ -2,11 +2,10 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model c006\products\models\ProductValueTextArea */
 
-$this->title = Yii::t('app', 'Create Product Value Text Area');
+$this->title                   = Yii::t('app', 'Create Product Value Text Area');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product Value Text Areas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

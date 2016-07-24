@@ -1,21 +1,16 @@
 <?php
 
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use c006\activeForm\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model c006\products\models\ProductCategory*/
+/* @var $model c006\products\models\ProductCategory */
 /* @var $form c006\activeForm\ActiveForm; */
 ?>
 
 <div class="product-category-form">
 
     <?php $form = ActiveForm::begin([]); ?>
-
-
-
-
 
 
     <div class="form-group">

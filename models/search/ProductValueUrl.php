@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductValueUrl as ProductValueUrlModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductValueUrl as ProductValueUrlModel;
 
 /**
  * ProductValueUrl represents the model behind the search form about `c006\products\models\ProductValueUrl`.
@@ -55,10 +55,10 @@ class ProductValueUrl extends ProductValueUrlModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
+            'id'              => $this->id,
+            'product_id'      => $this->product_id,
             'symbolic_url_id' => $this->symbolic_url_id,
-            'attr_id' => $this->attr_id,
+            'attr_id'         => $this->attr_id,
         ]);
 
         return $dataProvider;

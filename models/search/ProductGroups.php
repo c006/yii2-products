@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductGroups as ProductGroupsModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductGroups as ProductGroupsModel;
 
 /**
  * ProductGroups represents the model behind the search form about `c006\products\models\ProductGroups`.
@@ -55,10 +55,10 @@ class ProductGroups extends ProductGroupsModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
+            'id'                 => $this->id,
+            'product_id'         => $this->product_id,
             'product_include_id' => $this->product_include_id,
-            'position' => $this->position,
+            'position'           => $this->position,
         ]);
 
         return $dataProvider;

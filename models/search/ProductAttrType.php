@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductAttrType as ProductAttrTypeModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductAttrType as ProductAttrTypeModel;
 
 /**
  * ProductAttrType represents the model behind the search form about `c006\products\models\ProductAttrType`.
@@ -56,8 +56,8 @@ class ProductAttrType extends ProductAttrTypeModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'is_visible' => $this->is_visible,
+            'id'            => $this->id,
+            'is_visible'    => $this->is_visible,
             'show_in_admin' => $this->show_in_admin,
         ]);
 

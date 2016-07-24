@@ -14,15 +14,15 @@ class AssetTabs extends AssetBundle
 
     public $basePath = '@webroot';
 
-    public $baseUrl  = '@web';
+    public $baseUrl = '@web';
 
-    public $css      = [
+    public $css = [
         'css/tabs.css',
     ];
 
-    public $js       = [    ];
+    public $js = [];
 
-    public $depends  = [];
+    public $depends = [];
 
     /**
      * @var array

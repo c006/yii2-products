@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use c006\activeForm\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model c006\products\models\search\ProductAttrType */

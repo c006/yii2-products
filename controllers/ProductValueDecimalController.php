@@ -2,34 +2,33 @@
 
 namespace c006\products\controllers;
 
-
 use c006\products\assets\ProdHelpers;
-
-use Yii;
 use c006\products\models\ProductValueDecimal;
 use c006\products\models\search\ProductValueDecimal as ProductValueDecimalSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProductValueDecimalController implements the CRUD actions for ProductValueDecimal model.
  */
 class ProductValueDecimalController extends Controller
 {
-	
-	function init() {
-		//$this->layout = '@c006/products/views/layouts/main';
+
+    function init()
+    {
+        //$this->layout = '@c006/products/views/layouts/main';
         if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
             return $this->redirect('/user');
         }
-	}
-	
+    }
+
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -43,11 +42,11 @@ class ProductValueDecimalController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductValueDecimalSearch();
+        $searchModel  = new ProductValueDecimalSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -123,7 +122,7 @@ class ProductValueDecimalController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ProductValueDecimal::findOne($id)) !== null) {
+        if (($model = ProductValueDecimal::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

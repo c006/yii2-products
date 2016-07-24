@@ -5,7 +5,6 @@ namespace c006\products\assets;
 use c006\products\models\ProductImage;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
-use yii\imagine\Image;
 
 class ImageHelper
 {

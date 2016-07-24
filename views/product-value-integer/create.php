@@ -2,11 +2,10 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model c006\products\models\ProductValueInteger */
 
-$this->title = Yii::t('app', 'Create Product Value Integer');
+$this->title                   = Yii::t('app', 'Create Product Value Integer');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product Value Integers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

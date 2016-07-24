@@ -1,7 +1,6 @@
 <?php
 
 use c006\activeForm\ActiveForm;
-use c006\products\models\ProductType;
 use yii\bootstrap\Html;
 
 $types = \c006\products\models\ProductCoreType::find()->orderBy('value')->all();

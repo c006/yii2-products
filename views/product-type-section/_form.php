@@ -1,11 +1,11 @@
 <?php
 
+use c006\activeForm\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use c006\activeForm\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $modelc006\products\models\ProductTypeSection*/
+/* @var $modelc006\products\models\ProductTypeSection */
 /* @var $form c006\activeForm\ActiveForm; */
 ?>
 
@@ -13,12 +13,12 @@ use c006\activeForm\ActiveForm;
 
     <?php $form = ActiveForm::begin([]); ?>
 
-        <?
- 		$model_link = \c006\products\models\ProductType::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'value');
-		echo $form->field($model, 'product_type_id')->dropDownList($model_link)->label('Product Type') ?>
+    <?
+    $model_link = \c006\products\models\ProductType::find()->all();
+    $model_link = ArrayHelper::map($model_link, 'id', 'value');
+    echo $form->field($model, 'product_type_id')->dropDownList($model_link)->label('Product Type') ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => TRUE]) ?>
 
     <?= $form->field($model, 'position')->textInput() ?>
 

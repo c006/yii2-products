@@ -5,8 +5,7 @@ use yii\bootstrap\Html;
 
 $types = \c006\products\models\ProductType::find()->orderBy('name')->all();
 
-
-$this->title = Yii::t('app', 'Add Product');
+$this->title                   = Yii::t('app', 'Add Product');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

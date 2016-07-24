@@ -1,11 +1,10 @@
 <?php
 
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use c006\activeForm\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $modelc006\products\models\ProductCoreType*/
+/* @var $modelc006\products\models\ProductCoreType */
 /* @var $form c006\activeForm\ActiveForm; */
 ?>
 
@@ -13,7 +12,7 @@ use c006\activeForm\ActiveForm;
 
     <?php $form = ActiveForm::begin([]); ?>
 
-        <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'value')->textInput(['maxlength' => TRUE]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

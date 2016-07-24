@@ -16,19 +16,19 @@ echo $form->field($model, 'id')->dropDownList([0 => 'Disabled'] + $model_link)->
 
 <style>
     div[id^=PriceTier] {
-        margin                : 10px;
-        border                : 1px dotted #CCCCCC;
-        -webkit-border-radius : 10px;
-        -moz-border-radius    : 10px;
-        border-radius         : 10px;
+        margin                :10px;
+        border                :1px dotted #CCCCCC;
+        -webkit-border-radius :10px;
+        -moz-border-radius    :10px;
+        border-radius         :10px;
     }
 
     div[id^=PriceTier] .table-cell {
-        padding               : 5px;
-        border                : 1px solid #EEEEEE;
-        -webkit-border-radius : 10px;
-        -moz-border-radius    : 10px;
-        border-radius         : 10px;
+        padding               :5px;
+        border                :1px solid #EEEEEE;
+        -webkit-border-radius :10px;
+        -moz-border-radius    :10px;
+        border-radius         :10px;
     }
 </style>
 
@@ -58,6 +58,6 @@ echo $form->field($model, 'id')->dropDownList([0 => 'Disabled'] + $model_link)->
                 jQuery('#PriceTier-' + $this.val()).removeClass('hide');
             }).trigger('change');
 
-        jQuery('#pricetier-id').val('<?= ModelHelper::getProductValue($product_id, '\c006\products\models\ProductPriceTier','price_tier_id', "0") ?>');
+        jQuery('#pricetier-id').val('<?= ModelHelper::getProductValue($product_id, '\c006\products\models\ProductPriceTier', 'price_tier_id', "0") ?>');
     });
 </script>

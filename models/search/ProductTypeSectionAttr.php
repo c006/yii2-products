@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductTypeSectionAttr as ProductTypeSectionAttrModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductTypeSectionAttr as ProductTypeSectionAttrModel;
 
 /**
  * ProductTypeSectionAttr represents the model behind the search form about `c006\products\models\ProductTypeSectionAttr`.
@@ -55,10 +55,10 @@ class ProductTypeSectionAttr extends ProductTypeSectionAttrModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'                      => $this->id,
             'product_type_section_id' => $this->product_type_section_id,
-            'attr_id' => $this->attr_id,
-            'position' => $this->position,
+            'attr_id'                 => $this->attr_id,
+            'position'                => $this->position,
         ]);
 
         return $dataProvider;

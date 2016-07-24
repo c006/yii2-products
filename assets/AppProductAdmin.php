@@ -36,15 +36,15 @@ class AppProductAdmin
     {
 
         $connection = \Yii::$app->db;
-        $array = self::bubbleSort($this->columns);
+        $array      = self::bubbleSort($this->columns);
         self::resetColumnArrayKey($array);
         $this->sql['select'] = "";
-        $this->sql['join'] = "";
+        $this->sql['join']   = "";
 
         $sql_temp = "DROP TABLE IF EXISTS `" . $this->temp_table . "`; " . PHP_EOL;
         $sql_temp .= " CREATE TEMPORARY TABLE IF NOT EXISTS `" . $this->temp_table . "` AS (" . PHP_EOL;
         $this->sql['select'] = "SELECT " . PHP_EOL;
-        $this->sql['join'] = "";
+        $this->sql['join']   = "";
         foreach ($this->columns as $attribute) {
             //                $table  = ($attribute['table'] == "DEFAULT") ? "`" . $this->model->tableName() . "`." : '';
             $select = ($attribute['select']) ? $attribute['select'] : " `" . $attribute['table'] . "`.`" . $attribute['column'] . "`";
@@ -55,8 +55,8 @@ class AppProductAdmin
                 $this->sort_string .= " `" . $attribute['schema'] . "`.`" . $attribute['table'] . "`.`" . $attribute['column'] . "` " . $attribute['sort'] . "," . PHP_EOL;
         }
         $this->sql['select'] = substr($this->sql['select'], 0, strlen($this->sql['select']) - 2) . PHP_EOL;
-        $sql_from = " FROM `" . $this->model->tableName() . "`  " . PHP_EOL;
-        $this->sql['join'] = substr($this->sql['join'], 0, strlen($this->sql['join']) - 1) . PHP_EOL;
+        $sql_from            = " FROM `" . $this->model->tableName() . "`  " . PHP_EOL;
+        $this->sql['join']   = substr($this->sql['join'], 0, strlen($this->sql['join']) - 1) . PHP_EOL;
         $sql_temp .= (($this->sql['select'] = "SELECT ") ? "SELECT * " : $this->sql['select']) . $sql_from . $where_string . $this->sql['join'] . ") ";
         /***********************************************************************************************************************************************************************************************************************/
         /***********************************************************************************************************************************************************************************************************************/
@@ -74,7 +74,7 @@ class AppProductAdmin
         else {
             $count = $connection->createCommand("SELECT Count(*) FROM `" . $this->temp_table . "` `" . $this->model->tableName() . "` WHERE 1 = 1 " . $this->search)->queryColumn();
         }
-        $count = (sizeof($count)) ? $count[0] : 0;
+        $count           = (sizeof($count)) ? $count[0] : 0;
         $this->row_count = ceil($count / $this->page_limit);
         /* */
         if ($this->sort_string) {
@@ -93,7 +93,7 @@ class AppProductAdmin
         if (sizeof($array) < 1) {
             foreach ($sort_array as $key => $item) {
                 $item['key'] = $key;
-                $array[] = $item;
+                $array[]     = $item;
                 unset($sort_array[ $key ]);
                 break;
             }
@@ -127,14 +127,14 @@ class AppProductAdmin
     public function recursiveDataJoin($column_array)
     {
 
-        $return = FALSE;
+        $return      = FALSE;
         $linked_join = '';
         $this->link_join_i++;
         if (is_array($this->linked_join)) {
             foreach ($this->linked_join as $key_column => $value_array) {
                 if ($key_column == $column_array['column']) {
                     $value_array['parent_column'] = $key_column;
-                    $linked_join = $value_array;
+                    $linked_join                  = $value_array;
                     break;
                 }
             }
@@ -148,7 +148,7 @@ class AppProductAdmin
             if (!is_array($linked_array))
                 die("Problem with table {" . $linked_join['table'] . "} no data link!");
             $schema = ($linked_array['schema']) ? '`' . $linked_array['schema'] . '`.' : '';
-            $alias = 'join_' . $this->link_join_i;
+            $alias  = 'join_' . $this->link_join_i;
             if ($linked_join['join'] == "ATTRIBUTE") {
                 if (isset($linked_join['link_data'])) {
                     $this->sql['join'] .= " LEFT JOIN `" . $linked_join['link_data']['schema'] . "`.`" . $linked_join['link_data']['table'] . "` `" . $alias . "`

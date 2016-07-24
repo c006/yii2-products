@@ -7,11 +7,11 @@ use Yii;
 /**
  * This is the model class for table "product_core_type".
  *
- * @property integer $id
- * @property string $data
+ * @property integer                      $id
+ * @property string                       $data
  *
  * @property ProductAttrProductTypeLink[] $productAttrProductTypeLinks
- * @property ProductType[] $productTypes
+ * @property ProductType[]                $productTypes
  */
 class ProductCoreType extends \yii\db\ActiveRecord
 {
@@ -41,7 +41,7 @@ class ProductCoreType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id'    => Yii::t('app', 'ID'),
             'value' => Yii::t('app', 'Data'),
         ];
     }

@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductType as ProductTypeModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductType as ProductTypeModel;
 
 /**
  * ProductType represents the model behind the search form about `c006\products\models\ProductType`.
@@ -56,9 +56,9 @@ class ProductType extends ProductTypeModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'                   => $this->id,
             'product_core_type_id' => $this->product_core_type_id,
-            'is_viewable' => $this->is_viewable,
+            'is_viewable'          => $this->is_viewable,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

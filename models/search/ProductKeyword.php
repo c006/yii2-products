@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductKeyword as ProductKeywordModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductKeyword as ProductKeywordModel;
 
 /**
  * ProductKeyword represents the model behind the search form about `c006\products\models\ProductKeyword`.
@@ -55,7 +55,7 @@ class ProductKeyword extends ProductKeywordModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'         => $this->id,
             'product_id' => $this->product_id,
             'keyword_id' => $this->keyword_id,
         ]);

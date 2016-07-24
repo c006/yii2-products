@@ -1,4 +1,4 @@
-Yii2 user
+Yii2 produts
 ===================
 
 
@@ -12,13 +12,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 `
-php composer.phar require --prefer-dist "c006/yii2-user" "dev-master"
+php composer.phar require --prefer-dist "c006/yii2-produts" "dev-master"
 `
 
 or add
 
 `
-"c006/yii2-user": "dev-master"
+"c006/yii2-produts": "dev-master"
 `
 
 to the require section of your `composer.json` file.
@@ -32,7 +32,7 @@ Composer.json
     "repositories": [
         {
           "type": "vcs",
-          "url": "https://github.com/c006/yii2-user.git"
+          "url": "https://github.com/c006/yii2-produts.git"
         }
       ]
   
@@ -45,8 +45,8 @@ Setup
   
 >
     'modules'    => [
-        'user'            => [
-            'class'     => 'c006\user\Module',
+        'produts'            => [
+            'class'     => 'c006\produts\Module',
             'loginPath' => '/account/dashboard',
         ],
     ],

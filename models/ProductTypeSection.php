@@ -7,12 +7,12 @@ use Yii;
 /**
  * This is the model class for table "product_type_section".
  *
- * @property integer $id
- * @property integer $product_type_id
- * @property string $name
- * @property integer $position
+ * @property integer                  $id
+ * @property integer                  $product_type_id
+ * @property string                   $name
+ * @property integer                  $position
  *
- * @property ProductType $productType
+ * @property ProductType              $productType
  * @property ProductTypeSectionAttr[] $productTypeSectionAttrs
  */
 class ProductTypeSection extends \yii\db\ActiveRecord
@@ -34,7 +34,7 @@ class ProductTypeSection extends \yii\db\ActiveRecord
             [['product_type_id', 'name', 'position'], 'required'],
             [['product_type_id', 'position'], 'integer'],
             [['name'], 'string', 'max' => 45],
-            [['product_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductType::className(), 'targetAttribute' => ['product_type_id'=>'id']],
+            [['product_type_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => ProductType::className(), 'targetAttribute' => ['product_type_id' => 'id']],
         ];
     }
 
@@ -44,10 +44,10 @@ class ProductTypeSection extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id'              => Yii::t('app', 'ID'),
             'product_type_id' => Yii::t('app', 'Product Type ID'),
-            'name' => Yii::t('app', 'Name'),
-            'position' => Yii::t('app', 'Position'),
+            'name'            => Yii::t('app', 'Name'),
+            'position'        => Yii::t('app', 'Position'),
         ];
     }
 

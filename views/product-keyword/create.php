@@ -2,11 +2,10 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model c006\products\models\ProductKeyword */
 
-$this->title = Yii::t('app', 'Create Product Keyword');
+$this->title                   = Yii::t('app', 'Create Product Keyword');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product Keywords'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

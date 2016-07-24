@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\PriceTierLink as PriceTierLinkModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\PriceTierLink as PriceTierLinkModel;
 
 /**
  * PriceTierLink represents the model behind the search form about `c006\products\models\PriceTierLink`.
@@ -56,11 +56,11 @@ class PriceTierLink extends PriceTierLinkModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'            => $this->id,
             'price_tier_id' => $this->price_tier_id,
-            'price' => $this->price,
-            'max_qty' => $this->max_qty,
-            'position' => $this->position,
+            'price'         => $this->price,
+            'max_qty'       => $this->max_qty,
+            'position'      => $this->position,
         ]);
 
         return $dataProvider;

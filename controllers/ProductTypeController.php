@@ -3,20 +3,15 @@
 namespace c006\products\controllers;
 
 use c006\alerts\Alerts;
-use c006\products\assets\AssetJqueyUi;
 use c006\products\assets\AttrHelper;
 use c006\products\assets\FormHelper;
-use c006\products\assets\ModelHelper;
 use c006\products\assets\ProdHelpers;
-
-use c006\products\models\ProductTypeSection;
-use c006\products\models\ProductTypeSectionAttr;
-use Yii;
 use c006\products\models\ProductType;
 use c006\products\models\search\ProductType as ProductTypeSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProductTypeController implements the CRUD actions for ProductType model.
@@ -50,7 +45,7 @@ class ProductTypeController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductTypeSearch();
+        $searchModel  = new ProductTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

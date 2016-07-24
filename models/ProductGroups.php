@@ -32,7 +32,7 @@ class ProductGroups extends \yii\db\ActiveRecord
         return [
             [['product_id', 'product_include_id', 'position'], 'required'],
             [['product_id', 'product_include_id', 'position'], 'integer'],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id'=>'id']],
+            [['product_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
     }
 
@@ -42,10 +42,10 @@ class ProductGroups extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'id'                 => Yii::t('app', 'ID'),
+            'product_id'         => Yii::t('app', 'Product ID'),
             'product_include_id' => Yii::t('app', 'Product Include ID'),
-            'position' => Yii::t('app', 'Position'),
+            'position'           => Yii::t('app', 'Position'),
         ];
     }
 

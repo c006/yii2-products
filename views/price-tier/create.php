@@ -2,11 +2,10 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model c006\products\models\PriceTier */
 
-$this->title = Yii::t('app', 'Create Price Tier');
+$this->title                   = Yii::t('app', 'Create Price Tier');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Price Tiers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1 class="title-large"><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model'      => $model,
         'model_link' => $model_link,
     ]) ?>
 

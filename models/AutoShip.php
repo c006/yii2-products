@@ -7,9 +7,9 @@ use Yii;
 /**
  * This is the model class for table "auto_ship".
  *
- * @property integer $id
- * @property string $name
- * @property integer $active
+ * @property integer        $id
+ * @property string         $name
+ * @property integer        $active
  *
  * @property AutoShipLink[] $autoShipLinks
  */
@@ -31,7 +31,7 @@ class AutoShip extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['active'], 'integer'],
-            [['name'], 'string', 'max' => 45]
+            [['name'], 'string', 'max' => 45],
         ];
     }
 
@@ -41,8 +41,8 @@ class AutoShip extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'id'     => Yii::t('app', 'ID'),
+            'name'   => Yii::t('app', 'Name'),
             'active' => Yii::t('app', 'Active'),
         ];
     }

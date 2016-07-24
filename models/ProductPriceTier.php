@@ -30,7 +30,7 @@ class ProductPriceTier extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'price_tier_id'], 'required'],
-            [['product_id', 'price_tier_id'], 'integer']
+            [['product_id', 'price_tier_id'], 'integer'],
         ];
     }
 
@@ -40,8 +40,8 @@ class ProductPriceTier extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'id'            => Yii::t('app', 'ID'),
+            'product_id'    => Yii::t('app', 'Product ID'),
             'price_tier_id' => Yii::t('app', 'Price Tier ID'),
         ];
     }

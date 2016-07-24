@@ -7,13 +7,13 @@ use Yii;
 /**
  * This is the model class for table "product_value_integer".
  *
- * @property integer $id
- * @property integer $product_id
- * @property integer $attr_id
- * @property integer $data
+ * @property integer     $id
+ * @property integer     $product_id
+ * @property integer     $attr_id
+ * @property integer     $data
  *
  * @property ProductAttr $attr
- * @property Product $product
+ * @property Product     $product
  */
 class ProductValueInteger extends \yii\db\ActiveRecord
 {
@@ -33,8 +33,8 @@ class ProductValueInteger extends \yii\db\ActiveRecord
         return [
             [['product_id', 'attr_id', 'value'], 'required'],
             [['product_id', 'attr_id', 'value'], 'integer'],
-            [['attr_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductAttr::className(), 'targetAttribute' => ['attr_id'=>'id']],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id'=>'id']],
+            [['attr_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => ProductAttr::className(), 'targetAttribute' => ['attr_id' => 'id']],
+            [['product_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
     }
 
@@ -44,10 +44,10 @@ class ProductValueInteger extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id'         => Yii::t('app', 'ID'),
             'product_id' => Yii::t('app', 'Product ID'),
-            'attr_id' => Yii::t('app', 'Attr ID'),
-            'value' => Yii::t('app', 'Data'),
+            'attr_id'    => Yii::t('app', 'Attr ID'),
+            'value'      => Yii::t('app', 'Data'),
         ];
     }
 

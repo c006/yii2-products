@@ -2,11 +2,10 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model c006\products\models\ProductAttrProductTypeLink */
 
-$this->title = Yii::t('app', 'Create Product Attr Product Type Link');
+$this->title                   = Yii::t('app', 'Create Product Attr Product Type Link');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product Attr Product Type Links'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

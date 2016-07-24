@@ -7,9 +7,9 @@ use Yii;
 /**
  * This is the model class for table "price_tier".
  *
- * @property integer $id
- * @property string $name
- * @property integer $active
+ * @property integer         $id
+ * @property string          $name
+ * @property integer         $active
  *
  * @property PriceTierLink[] $priceTierLinks
  */
@@ -41,8 +41,8 @@ class PriceTier extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'id'     => Yii::t('app', 'ID'),
+            'name'   => Yii::t('app', 'Name'),
             'active' => Yii::t('app', 'Active'),
         ];
     }

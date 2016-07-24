@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductTypeSection as ProductTypeSectionModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductTypeSection as ProductTypeSectionModel;
 
 /**
  * ProductTypeSection represents the model behind the search form about `c006\products\models\ProductTypeSection`.
@@ -56,9 +56,9 @@ class ProductTypeSection extends ProductTypeSectionModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'              => $this->id,
             'product_type_id' => $this->product_type_id,
-            'position' => $this->position,
+            'position'        => $this->position,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

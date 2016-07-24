@@ -1,11 +1,11 @@
 <?php
 
+use c006\activeForm\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use c006\activeForm\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $modelc006\products\models\ProductAttrProductTypeLink*/
+/* @var $modelc006\products\models\ProductAttrProductTypeLink */
 /* @var $form c006\activeForm\ActiveForm; */
 ?>
 
@@ -13,15 +13,15 @@ use c006\activeForm\ActiveForm;
 
     <?php $form = ActiveForm::begin([]); ?>
 
-        <?
- 		$model_link = \c006\products\models\ProductAttr::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'value');
-		echo $form->field($model, 'attr_id')->dropDownList($model_link)->label('Product Attr') ?>
+    <?
+    $model_link = \c006\products\models\ProductAttr::find()->all();
+    $model_link = ArrayHelper::map($model_link, 'id', 'value');
+    echo $form->field($model, 'attr_id')->dropDownList($model_link)->label('Product Attr') ?>
 
     <?
- 		$model_link = \c006\products\models\ProductCoreType::find()->all();
-		$model_link = ArrayHelper::map($model_link, 'id', 'value');
-		echo $form->field($model, 'product_core_type_id')->dropDownList($model_link)->label('Product Core Type') ?>
+    $model_link = \c006\products\models\ProductCoreType::find()->all();
+    $model_link = ArrayHelper::map($model_link, 'id', 'value');
+    echo $form->field($model, 'product_core_type_id')->dropDownList($model_link)->label('Product Core Type') ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

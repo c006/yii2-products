@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductValueBit as ProductValueBitModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductValueBit as ProductValueBitModel;
 
 /**
  * ProductValueBit represents the model behind the search form about `c006\products\models\ProductValueBit`.
@@ -55,10 +55,10 @@ class ProductValueBit extends ProductValueBitModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'attr_id' => $this->attr_id,
+            'id'         => $this->id,
+            'attr_id'    => $this->attr_id,
             'product_id' => $this->product_id,
-            'value' => $this->data,
+            'value'      => $this->data,
         ]);
 
         return $dataProvider;

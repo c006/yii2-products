@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductCategory as ProductCategoryModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductCategory as ProductCategoryModel;
 
 /**
  * ProductCategory represents the model behind the search form about `c006\products\models\ProductCategory`.
@@ -55,8 +55,8 @@ class ProductCategory extends ProductCategoryModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
+            'id'          => $this->id,
+            'product_id'  => $this->product_id,
             'category_id' => $this->category_id,
         ]);
 

@@ -31,7 +31,7 @@ class ProductTag extends \yii\db\ActiveRecord
         return [
             [['product_id', 'tag_id'], 'required'],
             [['product_id', 'tag_id'], 'integer'],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id'=>'id']],
+            [['product_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
     }
 
@@ -41,9 +41,9 @@ class ProductTag extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id'         => Yii::t('app', 'ID'),
             'product_id' => Yii::t('app', 'Product ID'),
-            'tag_id' => Yii::t('app', 'Tag ID'),
+            'tag_id'     => Yii::t('app', 'Tag ID'),
         ];
     }
 

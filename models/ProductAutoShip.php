@@ -7,12 +7,12 @@ use Yii;
 /**
  * This is the model class for table "product_auto_ship".
  *
- * @property integer $id
- * @property integer $product_id
- * @property integer $auto_ship_id
+ * @property integer  $id
+ * @property integer  $product_id
+ * @property integer  $auto_ship_id
  *
  * @property AutoShip $autoShip
- * @property Product $product
+ * @property Product  $product
  */
 class ProductAutoShip extends \yii\db\ActiveRecord
 {
@@ -31,7 +31,7 @@ class ProductAutoShip extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'auto_ship_id'], 'required'],
-            [['product_id', 'auto_ship_id'], 'integer']
+            [['product_id', 'auto_ship_id'], 'integer'],
         ];
     }
 
@@ -41,8 +41,8 @@ class ProductAutoShip extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'id'           => Yii::t('app', 'ID'),
+            'product_id'   => Yii::t('app', 'Product ID'),
             'auto_ship_id' => Yii::t('app', 'Auto Ship ID'),
         ];
     }

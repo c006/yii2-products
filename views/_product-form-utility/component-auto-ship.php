@@ -8,11 +8,8 @@ use yii\helpers\ArrayHelper;
 
 $model = new \c006\products\models\AutoShip();
 
-
 $model_link = ModelHelper::getAutoShip(0, FALSE);
 $model_link = ArrayHelper::map($model_link, 'id', 'name');
-
-
 
 echo $form->field($model, 'id')->dropDownList([0 => 'Disabled'] + $model_link)->label('Auto Ship');
 
@@ -20,19 +17,19 @@ echo $form->field($model, 'id')->dropDownList([0 => 'Disabled'] + $model_link)->
 
 <style>
     div[id^=AutoShip] {
-        margin                : 10px;
-        border                : 1px dotted #CCCCCC;
-        -webkit-border-radius : 10px;
-        -moz-border-radius    : 10px;
-        border-radius         : 10px;
+        margin                :10px;
+        border                :1px dotted #CCCCCC;
+        -webkit-border-radius :10px;
+        -moz-border-radius    :10px;
+        border-radius         :10px;
     }
 
     div[id^=AutoShip] .table-cell {
-        padding               : 5px;
-        border                : 1px solid #EEEEEE;
-        -webkit-border-radius : 10px;
-        -moz-border-radius    : 10px;
-        border-radius         : 10px;
+        padding               :5px;
+        border                :1px solid #EEEEEE;
+        -webkit-border-radius :10px;
+        -moz-border-radius    :10px;
+        border-radius         :10px;
     }
 </style>
 
@@ -40,7 +37,7 @@ echo $form->field($model, 'id')->dropDownList([0 => 'Disabled'] + $model_link)->
     <div id="AutoShip-<?= $item['id'] ?>" class="table hide">
         <?php foreach (ModelHelper::getAutoShipLink($item['id']) as $_tier) : ?>
             <div class="table-cell">
-                <div><?= $_tier['duration']  ?> /  <?= $_tier['type'] ?></div>
+                <div><?= $_tier['duration'] ?> / <?= $_tier['type'] ?></div>
             </div>
         <?php endforeach ?>
     </div>
@@ -61,6 +58,6 @@ echo $form->field($model, 'id')->dropDownList([0 => 'Disabled'] + $model_link)->
                 jQuery('#AutoShip-' + $this.val()).removeClass('hide');
             }).trigger('change');
 
-        jQuery('#autoship-id').val('<?= ModelHelper::getProductValue($product_id, '\c006\products\models\ProductAutoShip','auto_ship_id', "0") ?>');
+        jQuery('#autoship-id').val('<?= ModelHelper::getProductValue($product_id, '\c006\products\models\ProductAutoShip', 'auto_ship_id', "0") ?>');
     });
 </script>

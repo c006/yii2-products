@@ -31,7 +31,7 @@ class ProductShippingPackaging extends \yii\db\ActiveRecord
         return [
             [['product_id', 'shipping_packaging_id'], 'required'],
             [['product_id', 'shipping_packaging_id'], 'integer'],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id'=>'id']],
+            [['product_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
     }
 
@@ -41,8 +41,8 @@ class ProductShippingPackaging extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'id'                    => Yii::t('app', 'ID'),
+            'product_id'            => Yii::t('app', 'Product ID'),
             'shipping_packaging_id' => Yii::t('app', 'Shipping Packaging ID'),
         ];
     }

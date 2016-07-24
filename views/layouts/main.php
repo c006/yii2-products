@@ -3,14 +3,12 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use c006\products\assets\ProductsMenu;
+use frontend\assets\AppAsset;
 use frontend\assets\NavMenu;
-use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
-use frontend\assets\AppAsset;
-use common\widgets\Alert;
 
 AppAsset::register($this);
 ?>
@@ -29,7 +27,6 @@ AppAsset::register($this);
     <link rel="stylesheet" href="/css/layout.css?<?= time() ?>"/>
     <!-- Products -->
     <link rel="stylesheet" href="/css/products.css?<?= time() ?>"/>
-
 
 
     <link rel="stylesheet" href="/css/c006-widget-sortable-list.css?<?= time() ?>"/>

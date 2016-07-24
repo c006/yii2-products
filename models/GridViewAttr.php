@@ -5,18 +5,17 @@ namespace c006\products\models;
 use Yii;
 
 /**
-* @property integer $product_id
-* @property string $product_type_id
-* @property string $component_categories
-* @property boolean $component_images
-* @property integer $component_pricing
-* @property integer $component_symbolic_url
-* @property float $core_active
-* @property string $core_name
-* @property string $core_sku
-* @property string $core_upc
-*/
-
+ * @property integer $product_id
+ * @property string  $product_type_id
+ * @property string  $component_categories
+ * @property boolean $component_images
+ * @property integer $component_pricing
+ * @property integer $component_symbolic_url
+ * @property float   $core_active
+ * @property string  $core_name
+ * @property string  $core_sku
+ * @property string  $core_upc
+ */
 class GridViewAttr extends \yii\db\ActiveRecord
 {
     public $product_id;
@@ -31,8 +30,16 @@ class GridViewAttr extends \yii\db\ActiveRecord
     public $core_upc;
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return ['product', 'product_type', 'product_attr'];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [];

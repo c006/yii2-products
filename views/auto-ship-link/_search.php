@@ -11,11 +11,11 @@ use yii\widgets\ActiveForm;
 <div class="auto-ship-link-search">
 
     <?php $form = ActiveForm::begin([
-    'action' => ['index'],
-    'method' => 'get',
+        'action' => ['index'],
+        'method' => 'get',
     ]); ?>
 
-        <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'auto_ship_id') ?>
 

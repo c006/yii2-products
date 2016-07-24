@@ -7,14 +7,14 @@ AppHelper::getHtmlList(0, TRUE);
 
 <style>
     #tree .checked {
-        background-color : rgba(155, 202, 242, 0.51);
+        background-color :rgba(155, 202, 242, 0.51);
     }
 
     #tree .tree-item {
-        padding               : 2px;
-        -webkit-border-radius : 3px;
-        -moz-border-radius    : 3px;
-        border-radius         : 3px;
+        padding               :2px;
+        -webkit-border-radius :3px;
+        -moz-border-radius    :3px;
+        border-radius         :3px;
     }
 </style>
 

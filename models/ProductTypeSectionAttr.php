@@ -7,12 +7,12 @@ use Yii;
 /**
  * This is the model class for table "product_type_section_attr".
  *
- * @property integer $id
- * @property integer $product_type_section_id
- * @property integer $attr_id
- * @property integer $position
+ * @property integer            $id
+ * @property integer            $product_type_section_id
+ * @property integer            $attr_id
+ * @property integer            $position
  *
- * @property ProductAttr $attr
+ * @property ProductAttr        $attr
  * @property ProductTypeSection $productTypeSection
  */
 class ProductTypeSectionAttr extends \yii\db\ActiveRecord
@@ -33,8 +33,8 @@ class ProductTypeSectionAttr extends \yii\db\ActiveRecord
         return [
             [['product_type_section_id', 'attr_id', 'position'], 'required'],
             [['product_type_section_id', 'attr_id', 'position'], 'integer'],
-            [['attr_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductAttr::className(), 'targetAttribute' => ['attr_id'=>'id']],
-            [['product_type_section_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductTypeSection::className(), 'targetAttribute' => ['product_type_section_id'=>'id']],
+            [['attr_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => ProductAttr::className(), 'targetAttribute' => ['attr_id' => 'id']],
+            [['product_type_section_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => ProductTypeSection::className(), 'targetAttribute' => ['product_type_section_id' => 'id']],
         ];
     }
 
@@ -44,10 +44,10 @@ class ProductTypeSectionAttr extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id'                      => Yii::t('app', 'ID'),
             'product_type_section_id' => Yii::t('app', 'Product Type Section ID'),
-            'attr_id' => Yii::t('app', 'Attr ID'),
-            'position' => Yii::t('app', 'Position'),
+            'attr_id'                 => Yii::t('app', 'Attr ID'),
+            'position'                => Yii::t('app', 'Position'),
         ];
     }
 

@@ -2,10 +2,10 @@
 
 namespace c006\products\models\search;
 
+use c006\products\models\ProductValueEncrypted as ProductValueEncryptedModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use c006\products\models\ProductValueEncrypted as ProductValueEncryptedModel;
 
 /**
  * ProductValueEncrypted represents the model behind the search form about `c006\products\models\ProductValueEncrypted`.
@@ -56,9 +56,9 @@ class ProductValueEncrypted extends ProductValueEncryptedModel
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'         => $this->id,
             'product_id' => $this->product_id,
-            'attr_id' => $this->attr_id,
+            'attr_id'    => $this->attr_id,
         ]);
 
         $query->andFilterWhere(['like', 'value', $this->data]);
