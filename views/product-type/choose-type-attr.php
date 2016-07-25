@@ -17,41 +17,43 @@ $array_available = AttrHelper::getAttrAvailable($array_used);
 
 <div id="content">
 
-    <div class="title-large"></div>
 
-    <div class="form">
-        <?php $form = ActiveForm::begin(['id' => 'form-submit']); ?>
+    <div class="item-container margin-top-30">
 
-        <?= $form->field($model, 'name')->hint('Internal reference only'); ?>
+        <div class="form">
+            <?php $form = ActiveForm::begin(['id' => 'form-submit']); ?>
 
-        <?= $form->field($model, 'product_core_type_id')->hide(); ?>
+            <?= $form->field($model, 'name')->hint('Internal reference only'); ?>
 
-        <div class="form-group">
-            <?= Html::button((($model->isNewRecord) ? 'Create Set' : 'Update Set'), ['class' => 'btn btn-primary', 'id' => 'button-submit']) ?>
-        </div>
+            <?= $form->field($model, 'product_core_type_id')->hide(); ?>
 
-
-        <div class="table">
-            <div class="table-cell width-50">
-                <h2 class="title-medium">In Use</h2>
-                <? $widget_destination = WidgetSortableList::begin(
-                        [
-                                'array'          => $array_used,
-                                'has_groups'     => TRUE,
-                                'is_destination' => TRUE,
-                        ]); ?>
-                <?php WidgetSortableList::end() ?>
-
+            <div class="form-group">
+                <?= Html::button((($model->isNewRecord) ? 'Create Set' : 'Update Set'), ['class' => 'btn btn-primary', 'id' => 'button-submit']) ?>
             </div>
-            <div class="table-cell">
-                <h2 class="title-medium">Available</h2>
-                <? $widget_available = WidgetSortableList::begin(
+
+
+            <div class="table">
+                <div class="table-cell width-50">
+                    <h2 class="title-medium">In Use</h2>
+                    <? $widget_destination = WidgetSortableList::begin(
                         [
-                                'array'          => $array_available,
-                                'has_groups'     => FALSE,
-                                'is_destination' => FALSE,
+                            'array'          => $array_used,
+                            'has_groups'     => TRUE,
+                            'is_destination' => TRUE,
                         ]); ?>
-                <?php WidgetSortableList::end() ?>
+                    <?php WidgetSortableList::end() ?>
+
+                </div>
+                <div class="table-cell">
+                    <h2 class="title-medium">Available</h2>
+                    <? $widget_available = WidgetSortableList::begin(
+                        [
+                            'array'          => $array_available,
+                            'has_groups'     => FALSE,
+                            'is_destination' => FALSE,
+                        ]); ?>
+                    <?php WidgetSortableList::end() ?>
+                </div>
             </div>
         </div>
     </div>
@@ -94,8 +96,8 @@ $array_available = AttrHelper::getAttrAvailable($array_used);
             jQuery('#<?= $widget_destination->unique_id ?>-button').click();
             for (var ii = 1; ii < _array[i].length; ii++) {
                 var $parent = jQuery('#<?= $widget_destination->unique_id ?>')
-                        .find('#<?= $widget_destination->unique_id ?>-' + _array[i][0].toLocaleLowerCase())
-                        .find('> ul');
+                    .find('#<?= $widget_destination->unique_id ?>-' + _array[i][0].toLocaleLowerCase())
+                    .find('> ul');
                 jQuery('li[item_name=' + _array[i][ii] + ']').appendTo($parent);
 
 
@@ -104,17 +106,17 @@ $array_available = AttrHelper::getAttrAvailable($array_used);
         <?php endif ?>
 
         jQuery('.<?= $widget_destination->class_name ?>-close')
-                .click(function () {
-                    console.log("IN");
-                    var $parent = jQuery(this).parent().parent();
-                    $parent.find('li')
-                            .each(function (i, _item) {
-                                var $available = jQuery('#<?= $widget_available->unique_id ?>')
-                                        .find('ul.<?= $widget_available->class_name ?>-ul');
-                                jQuery(_item).prependTo($available);
-                            });
-                    $parent.empty().remove();
-                });
+            .click(function () {
+                console.log("IN");
+                var $parent = jQuery(this).parent().parent();
+                $parent.find('li')
+                    .each(function (i, _item) {
+                        var $available = jQuery('#<?= $widget_available->unique_id ?>')
+                            .find('ul.<?= $widget_available->class_name ?>-ul');
+                        jQuery(_item).prependTo($available);
+                    });
+                $parent.empty().remove();
+            });
 
 
     }
@@ -130,34 +132,34 @@ $array_available = AttrHelper::getAttrAvailable($array_used);
 
     function on_submit_0001() {
         jQuery('#<?= $widget_destination->unique_id ?>')
-                .find('.<?= $widget_destination->class_name ?>-group-container')
-                .find('> div')
-                .each(function (_i) {
-                    var $group = jQuery(this);
-                    var $form = jQuery('#<?= $form->id ?>');
+            .find('.<?= $widget_destination->class_name ?>-group-container')
+            .find('> div')
+            .each(function (_i) {
+                var $group = jQuery(this);
+                var $form = jQuery('#<?= $form->id ?>');
 
-                    $form.append('' +
-                            '<input name="Sections[' + _i + '][0][id]" value="' + $group.attr('item_id') + '" type="hidden" />' +
-                            '<input name="Sections[' + _i + '][0][value]" value="' + $group.attr('item_name') + '" type="hidden" />' +
-                            '<input name="Sections[' + _i + '][0][position]" value="' + _i + '" type="hidden" />');
-                    $group.find('li')
-                            .each(function (pos) {
-                                $form.append('' +
-                                        '<input name="Sections[' + _i + '][' + jQuery(this).attr('item_id') + '][value]" value="' + jQuery(this).attr('item_id') + '" type="hidden" />' +
-                                        '<input name="Sections[' + _i + '][' + jQuery(this).attr('item_id') + '][link_id]" value="' + jQuery(this).attr('item_link_id') + '" type="hidden" />' +
-                                        '<input name="Sections[' + _i + '][' + jQuery(this).attr('item_id') + '][position]" value="' + (pos) + '" type="hidden" />');
-                            });
-                });
+                $form.append('' +
+                    '<input name="Sections[' + _i + '][0][id]" value="' + $group.attr('item_id') + '" type="hidden" />' +
+                    '<input name="Sections[' + _i + '][0][value]" value="' + $group.attr('item_name') + '" type="hidden" />' +
+                    '<input name="Sections[' + _i + '][0][position]" value="' + _i + '" type="hidden" />');
+                $group.find('li')
+                    .each(function (pos) {
+                        $form.append('' +
+                            '<input name="Sections[' + _i + '][' + jQuery(this).attr('item_id') + '][value]" value="' + jQuery(this).attr('item_id') + '" type="hidden" />' +
+                            '<input name="Sections[' + _i + '][' + jQuery(this).attr('item_id') + '][link_id]" value="' + jQuery(this).attr('item_link_id') + '" type="hidden" />' +
+                            '<input name="Sections[' + _i + '][' + jQuery(this).attr('item_id') + '][position]" value="' + (pos) + '" type="hidden" />');
+                    });
+            });
         jQuery('#<?= $form->id ?>').submit();
     }
 
     jQuery(function () {
         jQuery('#button-submit')
-                .click(function () {
-                    on_submit_0001();
-                });
+            .click(function () {
+                on_submit_0001();
+            });
 
-       attribute_setup();
+        attribute_setup();
     });
 
 </script>
