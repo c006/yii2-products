@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Url;
 
-/** @var  $form  \c006\activeForm\ActiveForm */
+/** @var  $form  \yii\widgets\ActiveForm */
 /** @var  $model \c006\products\models\form\ComponentImage */
 $model = new \c006\products\models\form\ComponentImage();
 /** @var  $array array */

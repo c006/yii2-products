@@ -1,13 +1,13 @@
 <?php
 
-use c006\activeForm\ActiveForm;
+use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model c006\products\models\ProductAttr */
 /* @var $model_link array */
-/* @var $form c006\activeForm\ActiveForm; */
+/* @var $form yii\widgets\ActiveForm; */
 ?>
 
 <div class="product-attr-form">

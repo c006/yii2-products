@@ -3,15 +3,16 @@
 namespace c006\products\assets;
 
 use c006\products\models\ProductImage;
-use Imagine\Gd\Imagine;
+
+use yii\imagine\Image;
 use Imagine\Image\Box;
 
 class ImageHelper
 {
     private $base_path = '';
     private $imagine;
-    private $image     = [];
-    private $sizes     = [
+    private $image = [];
+    private $sizes = [
         'sml' => 200,
         'med' => 400,
         'lrg' => 800,
@@ -20,7 +21,6 @@ class ImageHelper
     function __construct($base_path = FALSE)
     {
         $this->base_path = ($base_path) ? $base_path : \Yii::getAlias('@frontend') . '/web/images/products';
-        $this->imagine   = new Imagine();
     }
 
     /**
@@ -36,14 +36,16 @@ class ImageHelper
 
         self::deleteProductImages($product_id);
 
-        $pos  = 1;
+        $pos = 1;
         $time = time();
         foreach ($this->sizes as $k => $size) {
-            $size  = self::getNewImageSize($k);
-            $file  = $product_id . '-' . $time++ . '.jpg';
-            $image = $this->imagine->open($this->image['image']);
-            $image->resize(new Box($size['w'], $size['h']));
-            $image->save($this->base_path . '/' . $file, ['quality' => 90]);
+            $size = self::getNewImageSize($k);
+            $file = $product_id . '-' . $time++ . '.jpg';
+
+            Image::frame($this->image['image'])
+                ->resize(new Box($size['w'], $size['h']))
+                ->save($this->base_path . '/' . $file, ['quality' => 90]);
+
             ModelHelper::saveModelForm('c006\products\models\ProductImage', ['product_id' => $product_id, 'size' => $k, 'file' => $file, 'position' => $pos++]);
         }
     }
@@ -65,8 +67,8 @@ class ImageHelper
             if ($k != 'lrg') {
                 continue;
             }
-            $size  = self::getNewImageSize($k);
-            $file  = $product_id . '-' . time() . '.jpg';
+            $size = self::getNewImageSize($k);
+            $file = $product_id . '-' . time() . '.jpg';
             $image = $this->imagine->open($this->image['image']);
             $image->resize(new Box($size['w'], $size['h']));
             $image->save($this->base_path . '/' . $file, ['quality' => 90]);
@@ -84,17 +86,17 @@ class ImageHelper
     private function getNewImageSize($size, $keep_ratio = TRUE)
     {
 
-        $nw = $nh = $this->sizes[ $size ];
+        $nw = $nh = $this->sizes[$size];
 
         if ($keep_ratio) {
             /* W > H */
             if ($this->image['size'][0] > $this->image['size'][1]) {
                 $ratio = $this->image['size'][1] / $this->image['size'][0];
-                $nh    = $nw * $ratio;
+                $nh = $nw * $ratio;
             } else {
                 /* H > W */
                 $ratio = $this->image['size'][0] / $this->image['size'][1];
-                $nh    = $nh * $ratio;
+                $nh = $nh * $ratio;
             }
         }
 
@@ -181,11 +183,11 @@ class ImageHelper
             ->one();
 
         $this->image = [
-            'image' => $array_file['tmp_name']['imageReplace'][ $image_id ],
-            'size'  => getimagesize($array_file['tmp_name']['imageReplace'][ $image_id ]),
+            'image' => $array_file['tmp_name']['imageReplace'][$image_id],
+            'size'  => getimagesize($array_file['tmp_name']['imageReplace'][$image_id]),
         ];
 
-        $size  = self::getNewImageSize($model['size']);
+        $size = self::getNewImageSize($model['size']);
         $image = $this->imagine->open($this->image['image']);
         $image->resize(new Box($size['w'], $size['h']));
         $image->save($this->base_path . '/' . $model['file'], ['quality' => 90]);

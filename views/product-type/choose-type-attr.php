@@ -1,6 +1,6 @@
 <?php
 
-use c006\activeForm\ActiveForm;
+use yii\widgets\ActiveForm;
 use c006\products\assets\AttrHelper;
 use c006\widget\sortableList\WidgetSortableList;
 use yii\bootstrap\Html;
@@ -14,6 +14,7 @@ $array_available = AttrHelper::getAttrAvailable($array_used);
 //print_r($array_available); exit;
 ?>
 
+<link href="/css/sortable-list.css?<?= time() ?>" rel="stylesheet" type="text/css">
 
 <div id="content">
 
@@ -25,7 +26,7 @@ $array_available = AttrHelper::getAttrAvailable($array_used);
 
             <?= $form->field($model, 'name')->hint('Internal reference only'); ?>
 
-            <?= $form->field($model, 'product_core_type_id')->hide(); ?>
+            <?= $form->field($model, 'product_core_type_id')->hiddenInput()->label(FALSE); ?>
 
             <div class="form-group">
                 <?= Html::button((($model->isNewRecord) ? 'Create Set' : 'Update Set'), ['class' => 'btn btn-primary', 'id' => 'button-submit']) ?>
@@ -35,6 +36,7 @@ $array_available = AttrHelper::getAttrAvailable($array_used);
             <div class="table">
                 <div class="table-cell width-50">
                     <h2 class="title-medium">In Use</h2>
+
                     <? $widget_destination = WidgetSortableList::begin(
                         [
                             'array'          => $array_used,

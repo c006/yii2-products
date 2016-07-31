@@ -1,6 +1,6 @@
 <?php
 
-use c006\activeForm\ActiveForm;
+use yii\widgets\ActiveForm;
 use c006\products\models\ProductTypes;
 
 $types = ProductTypes::find()->orderBy('name')->all();

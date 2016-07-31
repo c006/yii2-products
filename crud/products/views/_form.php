@@ -18,11 +18,11 @@ echo "<?php\n";
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use c006\activeForm\ActiveForm;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model<?= ltrim($generator->modelClass, '\\') ?>*/
-/* @var $form c006\activeForm\ActiveForm; */
+/* @var $form yii\widgets\ActiveForm; */
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">

@@ -1,11 +1,11 @@
 <?php
 
-use c006\activeForm\ActiveForm;
+use yii\widgets\ActiveForm;
 use c006\products\assets\AttrHelper;
 use c006\products\assets\FormHelper;
 use yii\bootstrap\Html;
 
-/** @var  $form  \c006\activeForm\ActiveForm */
+/** @var  $form  \yii\widgets\ActiveForm */
 /** @var  $model \c006\products\models\Product */
 /** @var  $model_form */
 /** @var  $model_product_type \c006\products\models\ProductType */
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
              'options' => ['enctype' => 'multipart/form-data'],
             ]); ?>
 
-        <?php echo $form->field($model, 'product_type_id')->hide() ?>
+        <?php echo $form->field($model, 'product_type_id')->hiddenInput()->label(FALSE) ?>
 
         <div class="table">
 

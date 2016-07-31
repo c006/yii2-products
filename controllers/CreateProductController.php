@@ -69,6 +69,7 @@ class CreateProductController extends Controller
                 ->asArray()
                 ->one();
             $model_form_class       = FormHelper::createModelName($model_product_type['name']);
+
             if (isset($_POST[ $model_form_class ])) {
                 $model_product = [
                     'store_id'        => 0,
@@ -134,6 +135,10 @@ class CreateProductController extends Controller
 
                 return $this->redirect(['index']);
             }
+
+
+
+
             $model_form_class = 'c006\products\models\form\\' . $model_form_class;
             $model_form       = new $model_form_class();
 

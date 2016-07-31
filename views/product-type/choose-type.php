@@ -1,6 +1,6 @@
 <?php
 
-use c006\activeForm\ActiveForm;
+use yii\widgets\ActiveForm;
 use yii\bootstrap\Html;
 
 $types = \c006\products\models\ProductCoreType::find()->orderBy('value')->all();
@@ -10,9 +10,9 @@ $types = \c006\products\models\ProductCoreType::find()->orderBy('value')->all();
 
 <div id="content">
 
-    <div class="title-large"></div>
+    <h1 class="title-large">Product Type</h1>
 
-    <div class="item-container">
+    <div class="item-container margin-top-30">
 
         <div class="form">
             <?php $form = ActiveForm::begin(['id' => 'form-submit']); ?>

@@ -1,11 +1,11 @@
 <?php
 
-use c006\activeForm\ActiveForm;
+use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $modelc006\products\models\ProductAttrType */
-/* @var $form c006\activeForm\ActiveForm; */
+/* @var $form yii\widgets\ActiveForm; */
 ?>
 
 <div class="product-attr-type-form">

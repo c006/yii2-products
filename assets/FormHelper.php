@@ -125,7 +125,7 @@ class FormHelper
      */
     static public function formElement($form, $model, $attr)
     {
-        /** @var $form \c006\activeForm\ActiveForm; */
+        /** @var $form \yii\widgets\ActiveForm; */
         //$model = new $model();
         $element = strtolower($attr['attr_type']['element']);
         $type    = strtolower($attr['attr_type']['type']);
