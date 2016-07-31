@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1 class="title-large"><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <div class="item-container margin-top-30">
-        <?= Html::a(Yii::t('app', 'Create Auto Ship'), ['create'], ['class' => 'btn btn-secondary']) ?>
+    <div class="item-container margin-top-30 margin-bottom-20">
+        <?= Html::a(Yii::t('app', 'Create Auto Ship'), ['create'], ['class' => 'btn btn-primary']) ?>
 
 
         <?= GridView::widget([

@@ -37,11 +37,11 @@ use yii\helpers\Html;
                 <?= $form->field($model, 'name')->textInput(['maxlength' => TRUE]) ?>
                 <?= $form->field($model, 'active')->dropDownList(['No', 'Yes']) ?>
                 <div class="form-group">
-                    <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-secondary' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
                 </div>
             </div>
             <div class="table-cell padding-left-20" style="width: 50%">
-                <?= Html::button('Add Tier', ['class' => 'btn btn-primary', 'id' => 'button-add-tier']) ?>
+                <?= Html::button('Add Tier', ['class' => 'btn btn-secondary', 'id' => 'button-add-tier']) ?>
                 <div id="tier-container">
                     <?php if (sizeof($model_link)): ?>
                         <?php foreach ($model_link as $i => $item) : ?>

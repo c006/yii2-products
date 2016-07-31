@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1 class="title-large"><?= $this->title ?></h1>
 
-    <div class="item-container margin-top-30">
+    <div class="item-container margin-top-30 margin-bottom-20">
 
         <div class="form">
             <?php $form = ActiveForm::begin(
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </ul>
 
                     <div class="form-group padding-10">
-                        <?= Html::button(($model->isNewRecord) ? 'Create Product' : 'Update Product', ['class' => 'btn btn-secondary', 'name' => 'button-submit', 'id' => 'button-submit']) ?>
+                        <?= Html::button(($model->isNewRecord) ? 'Create Product' : 'Update Product', ['class' => 'btn btn-primary', 'name' => 'button-submit', 'id' => 'button-submit']) ?>
                     </div>
                 </div>
 

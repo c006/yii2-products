@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="item-container margin-top-30">
 
-    <?= Html::a(Yii::t('app', 'Create Product'), ['create-product/index'], ['class' => 'btn btn-secondary']) ?>
+    <?= Html::a(Yii::t('app', 'Create Product'), ['create-product/index'], ['class' => 'btn btn-primary']) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

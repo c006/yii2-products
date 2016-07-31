@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="item-container margin-top-30">
 
-        <?= Html::a(Yii::t('app', 'Create Tags'), ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a(Yii::t('app', 'Create Tags'), ['create'], ['class' => 'btn btn-primary']) ?>
 
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 [
                     'class'    => 'yii\grid\ActionColumn',
-                    'template' => '{update} {delete}',
+                    'template' => '<div class="nowrap">{update} {delete}</div>',
                 ],
             ],
         ]); ?>

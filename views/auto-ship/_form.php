@@ -41,11 +41,11 @@ $type = ['week', 'month', 'year'];
                 <?= $form->field($model, 'name')->textInput(['maxlength' => TRUE]) ?>
                 <?= $form->field($model, 'active')->dropDownList(['No', 'Yes']) ?>
                 <div class="form-group">
-                    <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-secondary' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
                 </div>
             </div>
             <div class="table-cell width-50 padding-left-20">
-                <?= Html::button('Add Date Increment', ['class' => 'btn btn-primary', 'id' => 'button-add-ship']) ?>
+                <?= Html::button('Add Date Increment', ['class' => 'btn btn-secondary', 'id' => 'button-add-ship']) ?>
                 <div id="link-container">
                     <?php if (sizeof($model_link)): ?>
                         <?php foreach ($model_link as $i => $item) : ?>

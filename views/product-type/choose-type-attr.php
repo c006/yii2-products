@@ -14,24 +14,30 @@ $array_available = AttrHelper::getAttrAvailable($array_used);
 //print_r($array_available); exit;
 ?>
 
+<style>
+    .vertical-align-bottom {
+        vertical-align: bottom;
+    }
+</style>
+
 <link href="/css/sortable-list.css?<?= time() ?>" rel="stylesheet" type="text/css">
 
 <div id="content">
 
 
-    <div class="item-container margin-top-30">
+    <div class="item-container margin-top-30 margin-bottom-20">
 
         <div class="form">
             <?php $form = ActiveForm::begin(['id' => 'form-submit']); ?>
 
-            <?= $form->field($model, 'name')->hint('Internal reference only'); ?>
-
-            <?= $form->field($model, 'product_core_type_id')->hiddenInput()->label(FALSE); ?>
-
-            <div class="form-group">
-                <?= Html::button((($model->isNewRecord) ? 'Create Set' : 'Update Set'), ['class' => 'btn btn-primary', 'id' => 'button-submit']) ?>
+            <div class="table">
+                <div class="table-cell padding-10 vertical-align-bottom"><?= $form->field($model, 'name'); ?></div>
+                <div class="table-cell padding-10 vertical-align-bottom">
+                    <?= Html::button((($model->isNewRecord) ? 'Create Set' : 'Update Set'), ['class' => 'btn btn-primary margin-bottom-15', 'id' => 'button-submit']) ?>
+                </div>
             </div>
 
+            <?= $form->field($model, 'product_core_type_id')->hiddenInput()->label(FALSE); ?>
 
             <div class="table">
                 <div class="table-cell width-50">
