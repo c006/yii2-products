@@ -14,58 +14,59 @@ use yii\bootstrap\Html;
 /** @var  $sections array */
 $sections = \c006\products\assets\AttrHelper::getSections($model->product_type_id);
 
-$this->title                   = Yii::t('app', 'Add Product');
+$this->title = Yii::t('app', 'Add Product');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div id="add-product-categories-container">
 
-    <div class="title-large"><?= $this->title ?></div>
+    <h1 class="title-large"><?= $this->title ?></h1>
 
-    <div class="form">
-        <?php $form = ActiveForm::begin(
-            ['id'      => 'form-submit',
-             'options' => ['enctype' => 'multipart/form-data'],
-            ]); ?>
+    <div class="item-container margin-top-30">
 
-        <?php echo $form->field($model, 'product_type_id')->hiddenInput()->label(FALSE) ?>
+        <div class="form">
+            <?php $form = ActiveForm::begin(
+                ['id'      => 'form-submit',
+                 'options' => ['enctype' => 'multipart/form-data'],
+                ]); ?>
 
-        <div class="table">
+            <?php echo $form->field($model, 'product_type_id')->hiddenInput()->label(FALSE) ?>
 
-            <div class="table-cell product-tab-container">
-                <ul id="vertical-tabs-container">
+            <div class="table">
+
+                <div class="table-cell product-tab-container">
+                    <ul id="vertical-tabs-container">
+                        <?php foreach ($sections as $_section) : ?>
+                            <li class="tab-section" item_id="<?= $_section['id'] ?>">
+                                <span><?= $_section['name'] ?></span>
+                            </li>
+                        <?php endforeach ?>
+                    </ul>
+
+                    <div class="form-group padding-10">
+                        <?= Html::button(($model->isNewRecord) ? 'Create Product' : 'Update Product', ['class' => 'btn btn-secondary', 'name' => 'button-submit', 'id' => 'button-submit']) ?>
+                    </div>
+                </div>
+
+                <div class="table-cell width-80">
                     <?php foreach ($sections as $_section) : ?>
-                        <li class="tab-section" item_id="<?= $_section['id'] ?>">
-                            <span><?= $_section['name'] ?></span>
-                        </li>
+                        <div id="section-<?= $_section['id'] ?>" item_id="<?= $_section['id'] ?>" class="section-container item-container">
+                            <div class="title-medium"><?= $_section['name'] ?></div>
+                            <?php foreach (AttrHelper::getSectionAttributes($_section['id']) as $_attr) : ?>
+                                <?php $model_form[$_attr['attr']['name']] = FormHelper::getAttrValue($product_id, $_attr) ?>
+                                <?php if ($_attr['attr_type']['element'] == 'component') : ?>
+                                    <?= FormHelper::component($model->id, $form, $_attr, FormHelper::createModelName($model_product_type['name'])) ?>
+                                <?php else: ?>
+                                    <?= FormHelper::formElement($form, $model_form, $_attr); ?>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                        </div>
                     <?php endforeach ?>
-                </ul>
-
-                <div class="form-group padding-10">
-                    <?= Html::button(($model->isNewRecord) ? 'Create Product' : 'Update Product', ['class' => 'btn btn-primary', 'name' => 'button-submit', 'id' => 'button-submit']) ?>
                 </div>
             </div>
-
-            <div class="table-cell width-80">
-                <?php foreach ($sections as $_section) : ?>
-                    <div id="section-<?= $_section['id'] ?>" item_id="<?= $_section['id'] ?>" class="section-container item-container">
-                        <div class="title-medium"><?= $_section['name'] ?></div>
-                        <?php foreach (AttrHelper::getSectionAttributes($_section['id']) as $_attr) : ?>
-                            <?php $model_form[ $_attr['attr']['name'] ] = FormHelper::getAttrValue($product_id, $_attr) ?>
-                            <?php if ($_attr['attr_type']['element'] == 'component') : ?>
-                                <?= FormHelper::component($model->id, $form, $_attr, FormHelper::createModelName($model_product_type['name'])) ?>
-                            <?php else: ?>
-                                <?= FormHelper::formElement($form, $model_form, $_attr); ?>
-                            <?php endif ?>
-                        <?php endforeach ?>
-                    </div>
-                <?php endforeach ?>
-            </div>
+            <?php ActiveForm::end(); ?>
         </div>
 
-
-        <?php ActiveForm::end(); ?>
     </div>
-
 </div>
 
 <?= c006\spinner\SubmitSpinner::widget(['form_id' => $form->id]); ?>

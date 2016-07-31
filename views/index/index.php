@@ -11,15 +11,12 @@ $this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<p>
-    <div class="title-large">Products</div>
-</p>
 
-<p>
-    <?= Html::a(Yii::t('app', 'Create Product'), ['create-product/index'], ['class' => 'btn btn-secondary']) ?>
-</p>
+<h1 class="title-large">Products</h1>
 
 <div class="item-container margin-top-30">
+
+    <?= Html::a(Yii::t('app', 'Create Product'), ['create-product/index'], ['class' => 'btn btn-secondary']) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
