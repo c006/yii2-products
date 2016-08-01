@@ -17,6 +17,9 @@ $sections = \c006\products\assets\AttrHelper::getSections($model->product_type_i
 $this->title = Yii::t('app', 'Add Product');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<link href="/css/products.css" rel="stylesheet" type="text/css">
+
 <div id="add-product-categories-container">
 
     <h1 class="title-large"><?= $this->title ?></h1>
