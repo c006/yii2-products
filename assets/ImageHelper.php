@@ -69,9 +69,11 @@ class ImageHelper
             }
             $size = self::getNewImageSize($k);
             $file = $product_id . '-' . time() . '.jpg';
-            $image = $this->imagine->open($this->image['image']);
-            $image->resize(new Box($size['w'], $size['h']));
-            $image->save($this->base_path . '/' . $file, ['quality' => 90]);
+
+            Image::frame($this->image['image'], 0, 'FFFFFF', 100)
+                ->resize(new Box($size['w'], $size['h']))
+                ->save($this->base_path . '/' . $file, ['quality' => 90]);
+
             $id = self::getImageId($file);
             ModelHelper::saveModelForm('c006\products\models\ProductImage', ['id' => $id, 'product_id' => $product_id, 'size' => $k, 'file' => $file, 'position' => $pos]);
         }
@@ -188,9 +190,11 @@ class ImageHelper
         ];
 
         $size = self::getNewImageSize($model['size']);
-        $image = $this->imagine->open($this->image['image']);
-        $image->resize(new Box($size['w'], $size['h']));
-        $image->save($this->base_path . '/' . $model['file'], ['quality' => 90]);
+
+        Image::frame($this->image['image'], 0, 'FFFFFF', 100)
+            ->resize(new Box($size['w'], $size['h']))
+            ->save($this->base_path . '/' . $model['file'], ['quality' => 90]);
+
     }
 
 

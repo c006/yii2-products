@@ -9,10 +9,10 @@ $array_used = ModelHelper::getPackagingUsed($product_id);
 $array_used = ModelHelper::addPackagingDate($array_used);
 
 $array_available = ModelHelper::getPackagingAvailable($array_used);
-print_r($array_available);
-echo PHP_EOL . PHP_EOL;
-print_r($array_used);
-exit;
+//print_r($array_available);
+//echo PHP_EOL . PHP_EOL;
+//print_r($array_used);
+//exit;
 ?>
 
 
