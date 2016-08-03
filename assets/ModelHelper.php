@@ -5,10 +5,12 @@ namespace c006\products\assets;
 use c006\alerts\Alerts;
 use c006\products\models\AutoShip;
 use c006\products\models\AutoShipLink;
+use c006\products\models\Brands;
 use c006\products\models\PriceTier;
 use c006\products\models\PriceTierLink;
 use c006\products\models\ProductAttr;
 use c006\products\models\ProductAttrType;
+use c006\products\models\ProductBrand;
 use c006\products\models\ProductCategory;
 use c006\products\models\ProductImage;
 use c006\products\models\ProductPackaging;
@@ -54,7 +56,7 @@ class ModelHelper
         }
 
         foreach ($array as $k => $v) {
-            $model[ $k ] = $v;
+            $model[$k] = $v;
         }
 
         if ($model->isNewRecord && $model->validate() && $model->save()) {
@@ -138,7 +140,7 @@ class ModelHelper
             ->asArray()
             ->one();
         if (sizeof($model)) {
-            return $model[ $value_column ];
+            return $model[$value_column];
         }
 
         return $default_value;
@@ -213,7 +215,7 @@ class ModelHelper
 
 
     /**
-     * @param int       $id
+     * @param int $id
      * @param bool|TRUE $as_array
      *
      * @return array|null|\yii\db\ActiveRecord|\yii\db\ActiveRecord[]
@@ -289,7 +291,7 @@ class ModelHelper
 
 
     /**
-     * @param int       $tag_id
+     * @param int $tag_id
      * @param bool|TRUE $as_array
      *
      * @return array|null|\yii\db\ActiveRecord|\yii\db\ActiveRecord[]
@@ -333,6 +335,7 @@ class ModelHelper
         return $model->all();
     }
 
+
     /**
      * @param $array_used
      *
@@ -346,7 +349,7 @@ class ModelHelper
         foreach ($array_used as $index => $item) {
             foreach ($array as $_index => $_item) {
                 if ($_item['id'] == $item['tag_id']) {
-                    unset($array[ $_index ]);
+                    unset($array[$_index]);
                     break;
                 }
             }
@@ -354,7 +357,6 @@ class ModelHelper
 
         return $array;
     }
-
 
     /**
      * @param $array
@@ -365,22 +367,49 @@ class ModelHelper
     {
         if (sizeof($array)) {
             foreach ($array as $index => $item) {
-                $id              = (isset($item['tag_id'])) ? $item['tag_id'] : $item['id'];
-                $model           = self::getTags($id, TRUE);
-                $array[ $index ] = $item;
+                $id = (isset($item['tag_id'])) ? $item['tag_id'] : $item['id'];
+                $model = self::getTags($id, TRUE);
+                $array[$index] = $item;
                 if (sizeof($model)) {
-                    $array[ $index ]['name'] = $model['name'];
+                    $array[$index]['name'] = $model['name'];
                 }
-                $array[ $index ]['is_required'] = 0;
-                $array[ $index ]['data']        = (isset($item['name'])) ? $item['name'] : '';
+                $array[$index]['is_required'] = 0;
+                $array[$index]['data'] = (isset($item['name'])) ? $item['name'] : '';
             }
         }
 
         return $array;
     }
 
+
     /**
-     * @param int  $package_id
+     * @param int $brand_id
+     * @param bool $as_array
+     * @return array|null|\yii\db\ActiveRecord|\yii\db\ActiveRecord[]
+     */
+    static public function getBrands($brand_id = 0, $as_array = TRUE)
+    {
+        if ($brand_id) {
+            $model = Brands::find()->where(['id' => $brand_id]);
+
+            if ($as_array) {
+                $model->asArray();
+            }
+
+            return $model->one();
+
+        }
+        $model = Brands::find()->orderBy('name');
+        if ($as_array) {
+            $model->asArray();
+        }
+
+        return $model->all();
+    }
+
+
+    /**
+     * @param int $package_id
      * @param bool $as_array
      *
      * @return array|null|\yii\db\ActiveRecord|\yii\db\ActiveRecord[]
@@ -433,7 +462,7 @@ class ModelHelper
         foreach ($array_used as $index => $item) {
             foreach ($array as $_index => $_item) {
                 if ($_item['id'] == $item['tag_id']) {
-                    unset($array[ $_index ]);
+                    unset($array[$_index]);
                     break;
                 }
             }
@@ -451,14 +480,14 @@ class ModelHelper
     {
         if (sizeof($array)) {
             foreach ($array as $index => $item) {
-                $id              = (isset($item['packaging_id'])) ? $item['packaging_id'] : $item['id'];
-                $model           = self::getPackaging($id, TRUE);
-                $array[ $index ] = $item;
+                $id = (isset($item['packaging_id'])) ? $item['packaging_id'] : $item['id'];
+                $model = self::getPackaging($id, TRUE);
+                $array[$index] = $item;
                 if (sizeof($model)) {
-                    $array[ $index ]['name'] = $model['name'];
+                    $array[$index]['name'] = $model['name'];
                 }
-                $array[ $index ]['is_required'] = 0;
-                $array[ $index ]['data']        = (isset($item['name'])) ? $item['name'] : '';
+                $array[$index]['is_required'] = 0;
+                $array[$index]['data'] = (isset($item['name'])) ? $item['name'] : '';
             }
         }
 
@@ -467,7 +496,7 @@ class ModelHelper
 
 
     /**
-     * @param int  $id
+     * @param int $id
      * @param bool $as_array
      *
      * @return array|null|\yii\db\ActiveRecord|\yii\db\ActiveRecord[]
@@ -495,7 +524,7 @@ class ModelHelper
 
 
     /**
-     * @param int  $id
+     * @param int $id
      * @param bool $as_array
      *
      * @return array|null|\yii\db\ActiveRecord|\yii\db\ActiveRecord[]
@@ -559,7 +588,22 @@ class ModelHelper
 
     }
 
+    /**
+     * @param $brand_id
+     * @param bool $as_array
+     * @return array|null|\yii\db\ActiveRecord
+     */
+    static public function getBrandName($brand_id, $as_array = TRUE)
+    {
+        $model = Brands::find()
+            ->where(['id' => $brand_id]);
+        if ($as_array) {
+            $model->asArray();
+        }
 
+        return $model->one();
+
+    }
 }
 
 

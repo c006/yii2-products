@@ -2,8 +2,11 @@
 
 namespace c006\products\assets;
 
+use c006\core\assets\CoreHelper;
 use c006\products\models\AutoShipLink;
 use c006\products\models\Product;
+use c006\products\models\ProductAttr;
+use c006\products\models\ProductAttrType;
 use c006\products\models\ProductAttrValue;
 use c006\products\models\ProductAutoShip;
 use c006\products\models\ProductCategory;
@@ -13,6 +16,7 @@ use c006\products\models\ProductPriceTier;
 use c006\products\models\ProductTag;
 use c006\products\models\ProductValueUrl;
 use c006\products\models\search\PriceTierLink;
+use c006\products\models\search\ProductBrand;
 use c006\url\assets\AppAliasUrl;
 
 class ProdHelpers
@@ -40,11 +44,11 @@ class ProdHelpers
 
             foreach ($array_in as $key => $value) {
 
-                $attr      = ModelHelper::getAttrByName($key);
+                $attr = ModelHelper::getAttrByName($key);
                 $attr_type = ModelHelper::getAttrType($attr['attr_type_id']);
                 if (sizeof($attr_type)) {
                     $model_class = 'c006\products\models\\' . FormHelper::createModelName($attr_type['value_table']);
-                    $model       = $model_class::find()
+                    $model = $model_class::find()
                         ->where(['product_id' => $product_id])
                         ->andWhere(['attr_id' => $attr['id']])
                         ->asArray()
@@ -109,6 +113,26 @@ class ProdHelpers
                 'position'   => $pos,
             ];
             ModelHelper::saveModelForm('c006\products\models\ProductTag', $model);
+        }
+    }
+
+    /**
+     * @param $product_id
+     * @param $brand_id
+     */
+    static public function saveProductBrands($product_id, $brand_id)
+    {
+        $model = ProductBrand::find()
+            ->where(['product_id' => $product_id])
+            ->andWhere(['id' => $brand_id])
+            ->asArray()
+            ->one();
+        if (sizeof($model) == 0) {
+            $model = [
+                'product_id' => $product_id,
+                'brand_id'   => $brand_id,
+            ];
+            ModelHelper::saveModelForm('c006\products\models\ProductBrand', $model);
         }
     }
 
@@ -184,11 +208,11 @@ class ProdHelpers
      */
     static public function saveProductUrl($product_id, $public)
     {
-        $model     = ProductValueUrl::find()
+        $model = ProductValueUrl::find()
             ->where(['product_id' => $product_id])
             ->asArray()
             ->one();
-        $private   = 'product-detail/index?id=' . $product_id;
+        $private = 'product-detail/index?id=' . $product_id;
         $alias_url = AppAliasUrl::addAliasByPrivate($public, $private, 1);
         if (sizeof($model) == 0) {
             $model = [
@@ -198,7 +222,7 @@ class ProdHelpers
                 'value'        => $public,
             ];
         } else {
-            $model['value']        = $public;
+            $model['value'] = $public;
             $model['alias_url_id'] = $alias_url->id;
         }
 
@@ -244,11 +268,11 @@ class ProdHelpers
 
     static public function getPrices($product_id)
     {
-        $array          = [];
+        $array = [];
         $array['price'] = 0;
-        $array['sale']  = 0;
-        $array['tier']  = [];
-        $model          = ProductPrice::find();
+        $array['sale'] = 0;
+        $array['tier'] = [];
+        $model = ProductPrice::find();
 
         return $model->asArray()->all();
     }
@@ -261,8 +285,8 @@ class ProdHelpers
      */
     static public function getProduct($product_id)
     {
-        $model  = Product::find();
-        $attrs  = self::getProductAttrs($product_id);
+        $model = Product::find();
+        $attrs = self::getProductAttrs($product_id);
         $select = [];
 //        print_r($attrs);
 //        exit;
@@ -306,6 +330,43 @@ class ProdHelpers
 
     /**
      * @param $product_id
+     * @param $attr_id
+     * @return string
+     */
+    static public function getProductAttrValue($product_id, $attr_id)
+    {
+        $model_attr = ProductAttr::find()
+            ->where(['id' => $attr_id])
+            ->asArray()
+            ->one();
+
+        if (!sizeof($model_attr)) {
+            return 'A';
+        }
+
+        $model_attr_type = ProductAttrType::find()
+            ->where(['id'=> $model_attr['attr_type_id']])
+            ->asArray()
+            ->one();
+
+        if (!sizeof($model_attr_type) || empty($model_attr_type['value_table'])) {
+            return 'B';
+        }
+
+        $model_table = 'c006\products\models\\' . ModelHelper::makeModelName($model_attr_type['value_table']);
+
+        $model = $model_table::find()
+            ->where(['product_id' => $product_id])
+            ->andWhere(['attr_id' => $attr_id])
+            ->asArray()
+            ->one();
+
+        return $model[$model_attr_type['column']];
+    }
+
+
+    /**
+     * @param $product_id
      *
      * @return mixed
      */
@@ -327,24 +388,24 @@ class ProdHelpers
 
             if ($item['value_table']) {
                 $model_table = 'c006\products\models\\' . ModelHelper::makeModelName($item['value_table']);
-                $value       = $model_table::find()
+                $value = $model_table::find()
                     ->where(['product_id' => $product_id])
                     ->andWhere(['attr_id' => $item['id']])
                     ->asArray()
                     ->one();
 
                 if ($item['attr_type_id'] != 5) {
-                    $model[ $index ]['value'] = $value[ $item['column'] ];
+                    $model[$index]['value'] = $value[$item['column']];
                 } else {
-                    $model_attr_value         = ProductAttrValue::findOne($value[ $item['column'] ]);
-                    $model[ $index ]['value'] = $model_attr_value->name;
+                    $model_attr_value = ProductAttrValue::findOne($value[$item['column']]);
+                    $model[$index]['value'] = $model_attr_value->name;
                 }
             }
         }
 
         foreach ($model as $index => $item) {
             if (empty($item['value'])) {
-                unset($model[ $index ]);
+                unset($model[$index]);
             }
         }
 
@@ -464,6 +525,7 @@ class ProdHelpers
             ->one();
 
     }
+
 
 }
 

@@ -1,8 +1,8 @@
 <?php
 
+use c006\products\assets\FormHelper;
 use yii\widgets\ActiveForm;
 use c006\products\assets\AttrHelper;
-use c006\products\assets\FormHelper;
 use yii\bootstrap\Html;
 
 /** @var  $form  \yii\widgets\ActiveForm */
@@ -15,18 +15,18 @@ use yii\bootstrap\Html;
 /** @var  $sections array */
 $sections = \c006\products\assets\AttrHelper::getSections($model->product_type_id);
 
-$this->title                   = Yii::t('app', 'Update Product');
+$this->title = Yii::t('app', 'Update Product');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => 'products'];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <style>
     .tab-section.section-on {
-        border :1px solid #416381;
+        border: 1px solid #416381;
     }
 
     .tab-section.section-error {
-        border :1px solid #9b403d !important;
+        border: 1px solid #9b403d !important;
     }
 </style>
 
@@ -36,11 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="form">
         <?php $form = ActiveForm::begin(
-                ['id'      => 'form-submit',
-                 'options' => ['enctype' => 'multipart/form-data'],
-                ]); ?>
+            ['id'      => 'form-submit',
+             'options' => ['enctype' => 'multipart/form-data'],
+            ]); ?>
 
-        <?php echo $form->field($model, 'product_type_id')->hide() ?>
+        <?php echo $form->field($model, 'product_type_id')->hiddenInput()->label(FALSE) ?>
 
         <div class="table">
 
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php if ($_attr['attr_type']['element'] == 'component') : ?>
                                 <?= FormHelper::component($model->id, $form, $_attr, FormHelper::createModelName($model_product_type['name'])) ?>
                             <?php else: ?>
-                                <?php $model_form[ $_attr['attr']['name'] ] = FormHelper::getAttrValue($product_id, $_attr) ?>
+                                <?php $model_form[$_attr['attr']['name']] = FormHelper::getAttrValue($product_id, $_attr) ?>
                                 <?= FormHelper::formElement($form, $model_form, $_attr); ?>
                             <?php endif ?>
                         <?php endforeach ?>
@@ -88,43 +88,43 @@ $this->params['breadcrumbs'][] = $this->title;
     jQuery(function () {
 
         jQuery('.tab-section')
-                .click(function () {
-                    var $this = jQuery(this);
-                    jQuery('.tab-section').removeClass('section-on');
-                    $this.addClass('section-on');
-                    jQuery('.section-container').hide();
-                    jQuery('#section-' + $this.attr('item_id')).show();
-                });
+            .click(function () {
+                var $this = jQuery(this);
+                jQuery('.tab-section').removeClass('section-on');
+                $this.addClass('section-on');
+                jQuery('.section-container').hide();
+                jQuery('#section-' + $this.attr('item_id')).show();
+            });
 
         jQuery('.tab-section:first-of-type').click();
 
         jQuery('#button-submit')
-                .click(function () {
-                    jQuery('#c006').show();
-                    jQuery('html').scrollTop(0);
-                    var ok = 1;
-                    var $form = jQuery('#<?= $form->id ?>');
-                    $form.find('input')
-                            .each(function () {
-                                jQuery(this).focus().blur();
-                            });
-                    jQuery('li.tab-section[item_id]').removeClass('section-error');
-                    setTimeout(function () {
-                        $form.find('div.has-error')
-                                .each(function () {
-                                    ok = 0;
-                                    var $this = jQuery(this);
-                                    var $parent = $this.closest('div[item_id')
-                                    jQuery('li.tab-section[item_id=' + $parent.attr('item_id') + ']').addClass('section-error');
-                                });
+            .click(function () {
+                jQuery('#c006').show();
+                jQuery('html').scrollTop(0);
+                var ok = 1;
+                var $form = jQuery('#<?= $form->id ?>');
+                $form.find('input')
+                    .each(function () {
+                        jQuery(this).focus().blur();
+                    });
+                jQuery('li.tab-section[item_id]').removeClass('section-error');
+                setTimeout(function () {
+                    $form.find('div.has-error')
+                        .each(function () {
+                            ok = 0;
+                            var $this = jQuery(this);
+                            var $parent = $this.closest('div[item_id')
+                            jQuery('li.tab-section[item_id=' + $parent.attr('item_id') + ']').addClass('section-error');
+                        });
 
-                        if (ok) {
-                            $form.submit();
-                        } else {
-                            jQuery('#c006').hide();
-                        }
-                    }, 300);
-                });
+                    if (ok) {
+                        $form.submit();
+                    } else {
+                        jQuery('#c006').hide();
+                    }
+                }, 300);
+            });
 
         <?php if (sizeof($product_categories))  : ?>
         /* Categories */

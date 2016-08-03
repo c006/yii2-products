@@ -63,19 +63,21 @@ class CreateProductController extends Controller
     {
         $model = new Product();
         if (isset($_POST['Product'])) {
+            $url = '';
             $model->product_type_id = $_POST['Product']['product_type_id'];
-            $model_product_type     = ProductType::find()
+            $model_product_type = ProductType::find()
                 ->where(['id' => $model->product_type_id])
                 ->asArray()
                 ->one();
-            $model_form_class       = FormHelper::createModelName($model_product_type['name']);
+            $model_form_class = FormHelper::createModelName($model_product_type['name']);
 
-            if (isset($_POST[ $model_form_class ])) {
+            if (isset($_POST[$model_form_class])) {
                 $model_product = [
                     'store_id'        => 0,
                     'product_type_id' => $model_product_type['id'],
                 ];
                 $model_product = ModelHelper::saveModelForm('c006\products\models\Product', $model_product);
+                $url .= $model_product->id;
 
                 /* Images */
                 if (isset($_FILES)
@@ -108,8 +110,25 @@ class CreateProductController extends Controller
                 if (isset($_POST['PriceTier'])) {
                     ProdHelpers::saveProductPriceTier($model_product->id, $_POST['PriceTier']['id']);
                 }
+
+                /* Brands */
+                if (isset($_POST['Brands'])) {
+                    ProdHelpers::saveProductBrands($model_product->id, $_POST['Brands']['id']);
+                    $url .= '-b-' . ModelHelper::getBrandName($_POST['Brands']['id'])['name'];
+                }
+
+
                 /* Product Url */
                 if (isset($_POST['ComponentProductUrl'])) {
+
+                    if ($_POST['ComponentProductUrl']['product_url'] == '/') {
+                        $product_name = '-p-' . $_POST[$model_form_class]['core_name'];
+
+                        $url .= $product_name;
+                        $url = CoreHelper::formatUrl($url);
+                        $_POST['ComponentProductUrl']['product_url'] = '/' . $url;
+                    }
+
                     ProdHelpers::saveProductUrl($model_product->id, $_POST['ComponentProductUrl']['product_url']);
                 }
                 /* Packaging */
@@ -122,8 +141,7 @@ class CreateProductController extends Controller
                 }
 
 
-
-                if (ProdHelpers::saveProductAttr($model_product->id, $_POST[ $model_form_class ])) {
+                if (ProdHelpers::saveProductAttr($model_product->id, $_POST[$model_form_class])) {
                     Alerts::setAlertType(Alerts::ALERT_SUCCESS);
                     Alerts::setMessage('SUCCESS, product update complete');
                     Alerts::setCountdown(5);
@@ -137,10 +155,8 @@ class CreateProductController extends Controller
             }
 
 
-
-
             $model_form_class = 'c006\products\models\form\\' . $model_form_class;
-            $model_form       = new $model_form_class();
+            $model_form = new $model_form_class();
 
             return $this->render('choose-type-attr',
                 [

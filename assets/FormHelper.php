@@ -69,6 +69,17 @@ class FormHelper
 
             return $content;
         }
+        if ($type == 'brands') {
+            $content = \Yii::$app->controller->renderPartial('/_product-form-utility/component-brand',
+                [
+                    'product_id'       => $product_id,
+                    'form'             => $form,
+                    'attr'             => $attr,
+                    'model_class_name' => $model_class_name,
+                ]);
+
+            return $content;
+        }
         if ($type == 'product_url') {
             $content = \Yii::$app->controller->renderPartial('/_product-form-utility/component-url',
                 [
@@ -125,6 +136,7 @@ class FormHelper
      */
     static public function formElement($form, $model, $attr)
     {
+
         /** @var $form \yii\widgets\ActiveForm; */
         //$model = new $model();
         $element = strtolower($attr['attr_type']['element']);

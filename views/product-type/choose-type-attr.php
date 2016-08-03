@@ -115,7 +115,6 @@ $array_available = AttrHelper::getAttrAvailable($array_used);
 
         jQuery('.<?= $widget_destination->class_name ?>-close')
             .click(function () {
-                console.log("IN");
                 var $parent = jQuery(this).parent().parent();
                 $parent.find('li')
                     .each(function (i, _item) {

@@ -26,6 +26,7 @@ class ProductsMenu
         $menuItems['products']['items'][] = ['label' => 'Tags', 'url' => ['/products/tags/index']];
         $menuItems['products']['items'][] = ['label' => 'Tier Pricing', 'url' => ['/products/price-tier/index']];
         $menuItems['products']['items'][] = ['label' => 'Auto Ship', 'url' => ['/products/auto-ship/index']];
+        $menuItems['products']['items'][] = ['label' => 'Brands', 'url' => ['/products/brands/index']];
         $menuItems['products']['items'][] = ['label' => 'Product Type', 'url' => ['/products/product-type/index']];
         $menuItems['products']['items'][] = ['label' => 'Add Product', 'url' => ['/products/create-product/index']];
         $menuItems['products']['items'][] = ['label' => 'Products', 'url' => ['/products/index']];

@@ -84,7 +84,8 @@ class AttrHelper
     {
 //    print_r($array_post); exit;
         $_pos = 1;
-        foreach ($array_post as $_section) {
+        $array_unset_section = [];
+        foreach ($array_post as $index => $_section) {
             $array_unset      = [];
             $model_section_id = 0;
             if (isset($_section[0])) {
@@ -100,6 +101,9 @@ class AttrHelper
                 $model_section    = ModelHelper::saveModelForm('\c006\products\models\ProductTypeSection', $array);
                 $model_section_id = $model_section['id'];
             }
+
+            $array_unset_section[] = $model_section_id;
+
             foreach ($_section as $id => $item) {
                 if ($id) {
                     $array = [
@@ -117,6 +121,10 @@ class AttrHelper
             if (sizeof($array_unset)) {
                 ModelHelper::modelDeleteWhere('\c006\products\models\ProductTypeSectionAttr', 'product_type_section_id = ' . $model_section_id . ' AND attr_id NOT IN(' . join(',', $array_unset) . ')');
             }
+        }
+
+        if (sizeof($array_unset_section)) {
+            ModelHelper::modelDeleteWhere('\c006\products\models\ProductTypeSection', 'product_type_id = ' . $product_type_id . ' AND id NOT IN(' . join(',', $array_unset_section) . ')');
         }
 
         return TRUE;

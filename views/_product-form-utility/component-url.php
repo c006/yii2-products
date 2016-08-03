@@ -1,5 +1,6 @@
 <?php
 /** @var  $product_id int */
+/** @var  $attr array */
 
 $model = new \c006\products\models\form\ComponentProductUrl();
 
@@ -11,7 +12,7 @@ if ($product_id) {
 ?>
 
 
-<?= $form->field($model, 'product_url')->label('Product Url'); ?>
+<?= $form->field($model, 'product_url')->label('Product Url')->hint($attr['attr']['hint']); ?>
 
 
 <script type="text/javascript">
