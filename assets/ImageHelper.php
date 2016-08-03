@@ -42,7 +42,7 @@ class ImageHelper
             $size = self::getNewImageSize($k);
             $file = $product_id . '-' . $time++ . '.jpg';
 
-            Image::frame($this->image['image'])
+            Image::frame($this->image['image'], 0, 'FFFFFF', 100)
                 ->resize(new Box($size['w'], $size['h']))
                 ->save($this->base_path . '/' . $file, ['quality' => 90]);
 
@@ -74,7 +74,8 @@ class ImageHelper
                 ->resize(new Box($size['w'], $size['h']))
                 ->save($this->base_path . '/' . $file, ['quality' => 90]);
 
-            $id = self::getImageId($file);
+//            $id = self::getImageId($file);
+
             ModelHelper::saveModelForm('c006\products\models\ProductImage', ['id' => $id, 'product_id' => $product_id, 'size' => $k, 'file' => $file, 'position' => $pos]);
         }
     }

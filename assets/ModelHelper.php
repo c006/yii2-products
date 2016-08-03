@@ -53,6 +53,9 @@ class ModelHelper
 
         if (isset($array['id']) && $array['id']) {
             $model->setIsNewRecord(FALSE);
+
+        } else {
+            unset($array['id']);
         }
 
         foreach ($array as $k => $v) {
@@ -61,8 +64,7 @@ class ModelHelper
 
         if ($model->isNewRecord && $model->validate() && $model->save()) {
             return $model;
-        }
-        if (!$model->isNewRecord) {
+        } else {
             $sql = "UPDATE " . $model->getTableSchema()->fullName . " ";
             $sql .= "SET ";
             foreach ($array as $k => $v) {

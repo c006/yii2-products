@@ -20,15 +20,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' =>
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<style>
-    .tab-section.section-on {
-        border: 1px solid #416381;
-    }
-
-    .tab-section.section-error {
-        border: 1px solid #9b403d !important;
-    }
-</style>
+<link href="/css/products.css" rel="stylesheet" type="text/css">
 
 <div id="add-product-categories-container">
 
@@ -90,8 +82,8 @@ $this->params['breadcrumbs'][] = $this->title;
         jQuery('.tab-section')
             .click(function () {
                 var $this = jQuery(this);
-                jQuery('.tab-section').removeClass('section-on');
-                $this.addClass('section-on');
+                jQuery('.tab-section').removeClass('on');
+                $this.addClass('on');
                 jQuery('.section-container').hide();
                 jQuery('#section-' + $this.attr('item_id')).show();
             });
