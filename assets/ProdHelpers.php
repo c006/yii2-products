@@ -345,7 +345,7 @@ class ProdHelpers
         }
 
         $model_attr_type = ProductAttrType::find()
-            ->where(['id'=> $model_attr['attr_type_id']])
+            ->where(['id' => $model_attr['attr_type_id']])
             ->asArray()
             ->one();
 
@@ -394,11 +394,13 @@ class ProdHelpers
                     ->asArray()
                     ->one();
 
-                if ($item['attr_type_id'] != 5) {
-                    $model[$index]['value'] = $value[$item['column']];
-                } else {
-                    $model_attr_value = ProductAttrValue::findOne($value[$item['column']]);
-                    $model[$index]['value'] = $model_attr_value->name;
+                if (isset($item['column']) && $item['column']) {
+                    if ($item['attr_type_id'] != 5 && isset($model[$index])) {
+                        $model[$index]['value'] = $value[$item['column']];
+                    } else {
+                        $model_attr_value = ProductAttrValue::findOne($value[$item['column']]);
+                        $model[$index]['value'] = $model_attr_value->name;
+                    }
                 }
             }
         }
