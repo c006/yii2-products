@@ -18,6 +18,7 @@ use c006\products\models\ProductValueUrl;
 use c006\products\models\search\PriceTierLink;
 use c006\products\models\search\ProductBrand;
 use c006\url\assets\AppAliasUrl;
+use Yii;
 
 class ProdHelpers
 {
@@ -124,7 +125,6 @@ class ProdHelpers
     {
         $model = ProductBrand::find()
             ->where(['product_id' => $product_id])
-            ->andWhere(['id' => $brand_id])
             ->asArray()
             ->one();
         if (sizeof($model) == 0) {
@@ -132,8 +132,15 @@ class ProdHelpers
                 'product_id' => $product_id,
                 'brand_id'   => $brand_id,
             ];
-            ModelHelper::saveModelForm('c006\products\models\ProductBrand', $model);
+        } else {
+            $model = [
+                'id'         => $model['id'],
+                'product_id' => $product_id,
+                'brand_id'   => $brand_id,
+            ];
         }
+
+        ModelHelper::saveModelForm('c006\products\models\ProductBrand', $model);
     }
 
     /**
@@ -374,7 +381,7 @@ class ProdHelpers
     {
         $model = Product::find()
             ->select("DISTINCT `product_attr`.*,
-            pat.element, pat.type, pat.value_table, pat.column, product_type_section_attr.`position`")
+            pat.element, pat.type, pat.value_table, pat.column, pat.value_table2, pat.column2, product_type_section_attr.`position`")
             ->innerJoin('product_type_section', "product_type_section.product_type_id = product.product_type_id")
             ->innerJoin('product_type_section_attr', "product_type_section_attr.product_type_section_id = product_type_section.id")
             ->innerJoin('product_attr', "product_attr.id = product_type_section_attr.attr_id AND product_attr.show_in_specs = 1")
@@ -403,7 +410,19 @@ class ProdHelpers
                     }
                 }
             }
+
+            if ($item['value_table2'] && $item['column2']) {
+
+                $sql = "SELECT * FROM `" . $item['value_table2'] . "` WHERE `id` = " . $model[$index]['value'] ;
+                $connection = Yii::$app->getDb();
+                $result = $connection->createCommand($sql)->queryOne();
+
+                if (is_array($result) && sizeof($result)) {
+                    $model[$index]['value'] = $result[$item['column2']];
+                }
+            }
         }
+
 
         foreach ($model as $index => $item) {
             if (empty($item['value'])) {

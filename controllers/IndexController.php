@@ -73,6 +73,7 @@ class IndexController extends Controller
     public function actionUpdate($id)
     {
         AssetTabs::register($this->getView());
+        $url = '';
 
         /** @var  $model \c006\products\models\Product */
         $model              = \c006\products\models\Product::findOne($id);
@@ -86,6 +87,7 @@ class IndexController extends Controller
          */
         if (isset($_POST[ $model_form_class ])) {
             $model_product = \c006\products\models\Product::findOne($id);
+            $url .= $model_product->id;
 
             /* Images */
             if (isset($_FILES)
@@ -139,8 +141,23 @@ class IndexController extends Controller
             if (isset($_POST['PriceTier'])) {
                 ProdHelpers::saveProductPriceTier($model_product->id, $_POST['PriceTier']['id']);
             }
+
+            /* Brands */
+            if (isset($_POST['Brands'])) {
+                ProdHelpers::saveProductBrands($model_product->id, $_POST['Brands']['id']);
+                $url .= '-b-' . ModelHelper::getBrandName($_POST['Brands']['id'])['name'];
+            }
+
             /* Product Url */
             if (isset($_POST['ComponentProductUrl'])) {
+
+                if ($_POST['ComponentProductUrl']['product_url'] == '/') {
+                    $product_name = '-p-' . $_POST[$model_form_class]['core_name'];
+                    $url .= $product_name;
+                    $url = CoreHelper::formatUrl($url);
+                    $_POST['ComponentProductUrl']['product_url'] = '/' . $url;
+                }
+
                 ProdHelpers::saveProductUrl($model_product->id, $_POST['ComponentProductUrl']['product_url']);
             }
 

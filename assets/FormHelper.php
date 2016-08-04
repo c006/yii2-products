@@ -26,7 +26,7 @@ class FormHelper
     static public function component($product_id, $form, $attr, $model_class_name)
     {
         $element = strtolower($attr['attr_type']['element']);
-        $type    = strtolower($attr['attr_type']['type']);
+        $type = strtolower($attr['attr_type']['type']);
         if ($type == 'category') {
             $content = \Yii::$app->controller->renderPartial('/_product-form-utility/component-category',
                 [
@@ -140,27 +140,29 @@ class FormHelper
         /** @var $form \yii\widgets\ActiveForm; */
         //$model = new $model();
         $element = strtolower($attr['attr_type']['element']);
-        $type    = strtolower($attr['attr_type']['type']);
+        $type = strtolower($attr['attr_type']['type']);
+        $css = strtolower($attr['attr']['css_style']);
+
         if ($element == 'input' && $type == 'text') {
-            return $form->field($model, $attr['attr']['name'])->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
+            return $form->field($model, $attr['attr']['name'])->textInput(['style' => $css])->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
         }
         if ($element == 'input' && $type == 'checkbox') {
-            return $form->field($model, $attr['attr']['name'])->dropDownList(['No', 'Yes'])->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
+            return $form->field($model, $attr['attr']['name'])->dropDownList(['No', 'Yes'], ['style' => $css])->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
         }
         if ($element == 'input' && $type == 'password') {
-            return $form->field($model, $attr['attr']['name'])->passwordInput()->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
+            return $form->field($model, $attr['attr']['name'])->passwordInput(['style' => $css])->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
         }
         if ($element == 'input' && $type == 'file') {
-            return $form->field($model, $attr['attr']['name'])->fileInput()->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
+            return $form->field($model, $attr['attr']['name'])->fileInput(['style' => $css])->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
         }
         if ($element == 'select') {
             $options = AttrHelper::getAttrValue($attr['attr']['id']);
             $options = ArrayHelper::map($options, 'id', 'name');
 
-            return $form->field($model, $attr['attr']['name'])->dropDownList($options)->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
+            return $form->field($model, $attr['attr']['name'])->dropDownList($options, ['style' => $css])->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
         }
         if ($element == 'textarea') {
-            return $form->field($model, $attr['attr']['name'])->textarea()->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
+            return $form->field($model, $attr['attr']['name'])->textarea(['style' => $css])->label(self::removeLabelCore($attr['attr']['label']))->hint($attr['attr']['hint']);
         }
     }
 
@@ -180,9 +182,9 @@ class FormHelper
     static public function createProductTypeForm($product_type_id)
     {
         $model_product_type = ProductType::find()->where(['id' => $product_type_id])->asArray()->one();
-        $path               = Yii::getAlias('@c006/products/models/form');
-        $class_name         = self::createModelName($model_product_type['name']);
-        $array              = [];
+        $path = Yii::getAlias('@c006/products/models/form');
+        $class_name = self::createModelName($model_product_type['name']);
+        $array = [];
         foreach (AttrHelper::getSections($product_type_id) as $item) {
             $model = AttrHelper::getSectionAttributes($item['id']);
             foreach ($model as $row) {

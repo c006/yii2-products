@@ -7,16 +7,19 @@ use Yii;
 /**
  * This is the model class for table "product_attr_type".
  *
- * @property integer       $id
- * @property string        $name
- * @property string        $element
- * @property string        $type
- * @property string        $description
- * @property string        $value_table
- * @property string        $column
- * @property string        $value_type
- * @property integer       $is_visible
- * @property integer       $show_in_admin
+ * @property integer $id
+ * @property string $name
+ * @property string $element
+ * @property string $type
+ * @property string $description
+ * @property string $value_table
+ * @property string $column
+ * @property string $value_type
+ * @property integer $is_visible
+ * @property integer $show_in_admin
+ * @property string $value_table2
+ * @property string $column2
+ *
  *
  * @property ProductAttr[] $productAttrs
  */
@@ -41,8 +44,8 @@ class ProductAttrType extends \yii\db\ActiveRecord
             [['is_visible', 'show_in_admin'], 'integer'],
             [['name'], 'string', 'max' => 200],
             [['element', 'type', 'value_type'], 'string', 'max' => 45],
-            [['value_table'], 'string', 'max' => 40],
-            [['column'], 'string', 'max' => 20],
+            [['value_table', 'value_table2'], 'string', 'max' => 40],
+            [['column', 'column2'], 'string', 'max' => 20],
         ];
     }
 
@@ -62,6 +65,8 @@ class ProductAttrType extends \yii\db\ActiveRecord
             'value_type'    => Yii::t('app', 'Value Type'),
             'is_visible'    => Yii::t('app', 'Is Visible'),
             'show_in_admin' => Yii::t('app', 'Show In Admin'),
+            'value_table2'  => Yii::t('app', 'Value Table'),
+            'column2'       => Yii::t('app', 'Column'),
         ];
     }
 

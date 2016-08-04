@@ -64,6 +64,7 @@ class CreateProductController extends Controller
         $model = new Product();
         if (isset($_POST['Product'])) {
             $url = '';
+
             $model->product_type_id = $_POST['Product']['product_type_id'];
             $model_product_type = ProductType::find()
                 ->where(['id' => $model->product_type_id])
@@ -123,7 +124,6 @@ class CreateProductController extends Controller
 
                     if ($_POST['ComponentProductUrl']['product_url'] == '/') {
                         $product_name = '-p-' . $_POST[$model_form_class]['core_name'];
-
                         $url .= $product_name;
                         $url = CoreHelper::formatUrl($url);
                         $_POST['ComponentProductUrl']['product_url'] = '/' . $url;
