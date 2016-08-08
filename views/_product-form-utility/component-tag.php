@@ -15,6 +15,8 @@ $array_available = ModelHelper::getTagsAvailable($array_used);
 //exit;
 ?>
 
+<link href="/css/sortable-list.css?<?= time() ?>" rel="stylesheet" type="text/css">
+
 
 <div id="tag-container">
     <div class="table">

@@ -15,7 +15,7 @@ class ImageHelper
     private $sizes = [
         'sml' => 200,
         'med' => 400,
-        'lrg' => 800,
+        'lrg' => 1000,
     ];
 
     function __construct($base_path = FALSE)

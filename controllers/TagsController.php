@@ -19,7 +19,7 @@ class TagsController extends Controller
     function init()
     {
         //$this->layout = '@c006/products/views/layouts/main';
-        if (ProdHelpers::checkLogin() && ProdHelpers::isGuest()) {
+        if (ProdHelpers::checkLogin()) {
             return $this->redirect('/user');
         }
     }

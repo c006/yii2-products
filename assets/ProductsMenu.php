@@ -28,6 +28,7 @@ class ProductsMenu
         $menuItems['products']['items'][] = ['label' => 'Auto Ship', 'url' => ['/products/auto-ship/index']];
         $menuItems['products']['items'][] = ['label' => 'Brands', 'url' => ['/products/brands/index']];
         $menuItems['products']['items'][] = ['label' => 'Product Type', 'url' => ['/products/product-type/index']];
+        $menuItems['products']['items'][] = ['label' => 'Description CSS', 'url' => ['/products/description-css/index']];
         $menuItems['products']['items'][] = ['label' => 'Add Product', 'url' => ['/products/create-product/index']];
         $menuItems['products']['items'][] = ['label' => 'Products', 'url' => ['/products/index']];
 

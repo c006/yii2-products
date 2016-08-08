@@ -2,6 +2,7 @@
 
 namespace c006\products\assets;
 
+use c006\category\models\Category;
 use c006\core\assets\CoreHelper;
 use c006\products\models\AutoShipLink;
 use c006\products\models\Product;
@@ -17,6 +18,7 @@ use c006\products\models\ProductTag;
 use c006\products\models\ProductValueUrl;
 use c006\products\models\search\PriceTierLink;
 use c006\products\models\search\ProductBrand;
+use c006\products\models\Tags;
 use c006\url\assets\AppAliasUrl;
 use Yii;
 
@@ -219,7 +221,7 @@ class ProdHelpers
             ->where(['product_id' => $product_id])
             ->asArray()
             ->one();
-        $private = 'product-detail/index?id=' . $product_id;
+        $private = 'ecommerce/product-detail/index?id=' . $product_id;
         $alias_url = AppAliasUrl::addAliasByPrivate($public, $private, 1);
         if (sizeof($model) == 0) {
             $model = [
@@ -413,7 +415,7 @@ class ProdHelpers
 
             if ($item['value_table2'] && $item['column2']) {
 
-                $sql = "SELECT * FROM `" . $item['value_table2'] . "` WHERE `id` = " . $model[$index]['value'] ;
+                $sql = "SELECT * FROM `" . $item['value_table2'] . "` WHERE `id` = " . $model[$index]['value'];
                 $connection = Yii::$app->getDb();
                 $result = $connection->createCommand($sql)->queryOne();
 
@@ -443,21 +445,36 @@ class ProdHelpers
     {
 
         $model = Product::find()
-            ->select("DISTINCT `product`.*, product_image.file AS `image`, _name.value AS `name`, _price.`value` AS `price`, _discount.`value` AS `discount`
+            ->select("DISTINCT `product`.*, product_image.file AS `image`, _name.value AS `name`, _sub_name.value AS `sub_name`, _price.`value` AS `price`, _discount.`value` AS `discount`
              , _url.value AS `url`")
             ->leftJoin('product_category', "product_category.product_id = product.id AND product_category.category_id = " . $category_id)
             ->leftJoin('product_image', "product_image.size = 'sml' AND product_image.product_id = product.id")
             ->leftJoin('product_value_text _name', "_name.attr_id = 1 AND _name.product_id = product.id")
+            ->leftJoin('product_value_text _sub_name', "_sub_name.attr_id = 34 AND _sub_name.product_id = product.id")
             ->leftJoin('product_value_decimal _price', "_price.attr_id = 15 AND _price.product_id = product.id")
             ->leftJoin('product_value_decimal _discount', "_discount.attr_id = 16 AND _discount.product_id = product.id")
             ->leftJoin('product_value_url _url', "_url.product_id = product.id")
             ->innerJoin('product_value_bit _active', "_active.attr_id = 4 AND _active.product_id = product.id")
-//            ->where(' X ')
             ->asArray()
             ->all();
 
         return $model;
     }
+
+    /**
+     * @param $category_id
+     * @return string
+     */
+    static public function getCategoryName($category_id)
+    {
+        $model = Category::find()
+            ->where(['id' => $category_id])
+            ->asArray()
+            ->one();
+
+        return (sizeof($model)) ? $model['name'] : 'NO';
+    }
+
 
     /**
      * @param $auto_ship_id
@@ -547,6 +564,20 @@ class ProdHelpers
 
     }
 
+    /**
+     * @param array $ids
+     * @return array
+     */
+    static public function getProductTags($ids = [])
+    {
+        $model = Tags::find()
+            ->innerJoin('product_tag _pt', " _pt.product_id IN ( " . join(",", $ids) . ") ")
+            ->where(" tags.id = _pt.tag_id ")
+            ->asArray()
+            ->all();
+
+        return $model;
+    }
 
 }
 
