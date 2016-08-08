@@ -59,7 +59,7 @@ class FormHelper
             return $content;
         }
         if ($type == 'tags') {
-            $content = \Yii::$app->controller->renderPartial('/_product-form-utility/component-tag',
+            $content = \Yii::$app->controller->renderPartial('/_product-form-utility/component-sort-tag',
                 [
                     'product_id'       => $product_id,
                     'form'             => $form,

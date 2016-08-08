@@ -6,7 +6,7 @@ use c006\widget\sortableList\WidgetSortableList;
 /** @var  $product_id int */
 
 $array_used = ModelHelper::getPackagingUsed($product_id);
-$array_used = ModelHelper::addPackagingDate($array_used);
+$array_used = ModelHelper::addPackagingData($array_used);
 
 $array_available = ModelHelper::getPackagingAvailable($array_used);
 //print_r($array_available);

@@ -60,7 +60,7 @@ class IndexController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel  = new Product();
+        $searchModel = new Product();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -76,16 +76,16 @@ class IndexController extends Controller
         $url = '';
 
         /** @var  $model \c006\products\models\Product */
-        $model              = \c006\products\models\Product::findOne($id);
+        $model = \c006\products\models\Product::findOne($id);
         $model_product_type = ProductType::find()
             ->where(['id' => $model->product_type_id])
             ->asArray()
             ->one();
-        $model_form_class   = FormHelper::createModelName($model_product_type['name']);
+        $model_form_class = FormHelper::createModelName($model_product_type['name']);
         /*
          *
          */
-        if (isset($_POST[ $model_form_class ])) {
+        if (isset($_POST[$model_form_class])) {
             $model_product = \c006\products\models\Product::findOne($id);
             $url .= $model_product->id;
 
@@ -124,11 +124,9 @@ class IndexController extends Controller
             }
 
             /* Tags */
-            if (isset($_POST['Tags'])) {
-                foreach ($_POST['Tags'] as $pos => $_array) {
-                    foreach ($_array as $null => $tag_id) {
-                        ProdHelpers::saveProductTags($model_product->id, $tag_id, $pos);
-                    }
+            if (isset($_POST['SortTag'])) {
+                foreach ($_POST['SortTag'] as $tag_id => $_array) {
+                    ProdHelpers::saveProductTags($model_product->id, $tag_id, 0);
                 }
             }
 
@@ -175,7 +173,7 @@ class IndexController extends Controller
              */
 
 //            print_r($_POST[ $model_form_class ]); exit;
-            if (ProdHelpers::saveProductAttr($model_product->id, $_POST[ $model_form_class ])) {
+            if (ProdHelpers::saveProductAttr($model_product->id, $_POST[$model_form_class])) {
                 Alerts::setAlertType(Alerts::ALERT_SUCCESS);
                 Alerts::setMessage('SUCCESS, product update complete');
                 Alerts::setCountdown(5);
@@ -187,8 +185,8 @@ class IndexController extends Controller
 
             return $this->redirect(['index']);
         }
-        $model_form_class   = 'c006\products\models\form\\' . $model_form_class;
-        $model_form         = new $model_form_class();
+        $model_form_class = 'c006\products\models\form\\' . $model_form_class;
+        $model_form = new $model_form_class();
         $product_categories = ModelHelper::getProductCategories($model->id);
 
         return $this->render('update-product',

@@ -15,6 +15,8 @@ use c006\products\models\ProductCategory;
 use c006\products\models\ProductImage;
 use c006\products\models\ProductPackaging;
 use c006\products\models\ProductTag;
+use c006\products\models\SortTag;
+use c006\products\models\SortTagGroups;
 use c006\products\models\Tags;
 use c006\shipping\models\ShippingAddresses;
 use c006\shipping\models\ShippingPackaging;
@@ -319,16 +321,17 @@ class ModelHelper
     }
 
     /**
-     * @param           $product_id
-     * @param bool|TRUE $as_array
-     *
+     * @param bool $as_array
      * @return array|\yii\db\ActiveRecord[]
      */
-    static public function getTagsUsed($product_id, $as_array = TRUE)
+    static public function getSortTags($group_id = 0, $as_array = TRUE)
     {
-        $model = ProductTag::find()
-            ->where(['product_id' => $product_id])
-            ->orderBy('position');
+        $model = SortTag::find();
+        if ($group_id) {
+            $model->where(['sort_tag_group_id' => $group_id]);
+        }
+
+        $model->orderBy('name');
 
         if ($as_array) {
             $model->asArray();
@@ -339,26 +342,41 @@ class ModelHelper
 
 
     /**
-     * @param $array_used
-     *
-     * @return array|null|\yii\db\ActiveRecord|\yii\db\ActiveRecord[]
+     * @param int $product_id
+     * @return array|\yii\db\ActiveRecord[]
      */
-    static public function getTagsAvailable($array_used)
+    static public function getSortTagsUsed($product_id = 0)
     {
-        $array = self::getTags();
-        $array = self::addTagData($array);
+        $array = [];
 
-        foreach ($array_used as $index => $item) {
-            foreach ($array as $_index => $_item) {
-                if ($_item['id'] == $item['tag_id']) {
-                    unset($array[$_index]);
-                    break;
-                }
+        $model_sort_tag_group = SortTagGroups::find()
+            ->orderBy(" name ")
+            ->asArray()
+            ->all();
+
+        $model = ProductTag::find()
+            ->select("tag_id")
+            ->where(['product_id' => $product_id])
+            ->asArray()
+            ->all();
+        $array_product_tags = [];
+        foreach ($model as $item) {
+            $array_product_tags[] = $item['tag_id'];
+        }
+
+        foreach ($model_sort_tag_group as $item) {
+
+            $array[$item['id']] = ['name' => $item['name'], 'items' => []];
+
+            foreach (self::getSortTags($item['id']) as $_item) {
+                $checked = (in_array($_item['id'], $array_product_tags) == FALSE) ? 0 : 1;
+                $array[$item['id']]['items'][] = ['id' => $_item['id'], 'name' => $_item['name'], 'checked' => $checked];
             }
         }
 
         return $array;
     }
+
 
     /**
      * @param $array
@@ -419,7 +437,7 @@ class ModelHelper
     static public function getPackaging($package_id = 0, $as_array = TRUE)
     {
         if ($package_id) {
-            $model = Tags::find()->where(['id' => $package_id]);
+            $model = ShippingPackaging::find()->where(['id' => $package_id]);
 
             if ($as_array) {
                 $model->asArray();
@@ -459,7 +477,7 @@ class ModelHelper
     static public function getPackagingAvailable($array_used)
     {
         $array = self::getPackaging();
-        $array = self::addTagData($array);
+        $array = self::addPackagingData($array);
 
         foreach ($array_used as $index => $item) {
             foreach ($array as $_index => $_item) {
@@ -478,7 +496,7 @@ class ModelHelper
      *
      * @return mixed
      */
-    public static function addPackagingDate($array)
+    public static function addPackagingData($array)
     {
         if (sizeof($array)) {
             foreach ($array as $index => $item) {
