@@ -321,6 +321,7 @@ class ModelHelper
     }
 
     /**
+     * @param int $group_id
      * @param bool $as_array
      * @return array|\yii\db\ActiveRecord[]
      */
@@ -332,6 +333,28 @@ class ModelHelper
         }
 
         $model->orderBy('name');
+
+        if ($as_array) {
+            $model->asArray();
+        }
+
+        return $model->all();
+    }
+
+    /**
+     * @param array $in
+     * @param bool $as_array
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    static public function getSortTagsIn($in = [], $as_array = TRUE)
+    {
+        if (!sizeof($in)) {
+            return [];
+        }
+
+        $model = SortTag::find()
+            ->where(" id IN ( " . join(',', $in) . ") ")
+            ->orderBy('name');
 
         if ($as_array) {
             $model->asArray();

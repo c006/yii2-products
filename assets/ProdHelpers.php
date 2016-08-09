@@ -18,6 +18,8 @@ use c006\products\models\ProductTag;
 use c006\products\models\ProductValueUrl;
 use c006\products\models\search\PriceTierLink;
 use c006\products\models\search\ProductBrand;
+use c006\products\models\SortTag;
+use c006\products\models\SortTagGroups;
 use c006\products\models\Tags;
 use c006\url\assets\AppAliasUrl;
 use Yii;
@@ -441,7 +443,7 @@ class ProdHelpers
      *
      * @return mixed
      */
-    static public function getCategoryProducts($category_id)
+    static public function getCategoryProducts($category_id, $sort_tags = [])
     {
 
         $model = Product::find()
@@ -454,9 +456,15 @@ class ProdHelpers
             ->leftJoin('product_value_decimal _price', "_price.attr_id = 15 AND _price.product_id = product.id")
             ->leftJoin('product_value_decimal _discount', "_discount.attr_id = 16 AND _discount.product_id = product.id")
             ->leftJoin('product_value_url _url', "_url.product_id = product.id")
-            ->innerJoin('product_value_bit _active', "_active.attr_id = 4 AND _active.product_id = product.id")
-            ->asArray()
-            ->all();
+            ->innerJoin('product_value_bit _active', "_active.value = 1 AND _active.attr_id = 4 AND _active.product_id = product.id");
+
+        if (sizeof($sort_tags)) {
+            foreach ($sort_tags as $index => $item) {
+                $model = $model->innerJoin('product_tag _pt' . $index, "_pt" . $index . ".product_id = product.id AND _pt" . $index . ".tag_id = " . $item . " ");
+            }
+        }
+
+        $model = $model->asArray()->all();
 
         return $model;
     }
@@ -570,13 +578,40 @@ class ProdHelpers
      */
     static public function getProductTags($ids = [])
     {
-        $model = Tags::find()
+        if (!sizeof($ids)) {
+            return [];
+        }
+
+        $group_ids = [];
+        $array = [];
+
+        $model = SortTag::find()
             ->innerJoin('product_tag _pt', " _pt.product_id IN ( " . join(",", $ids) . ") ")
-            ->where(" tags.id = _pt.tag_id ")
+            ->where(" sort_tag.id = _pt.tag_id ")
             ->asArray()
             ->all();
 
-        return $model;
+        foreach ($model as $item) {
+            $group_ids[$item['sort_tag_group_id']] = $item['sort_tag_group_id'];
+        }
+
+        $model_groups = SortTagGroups::find()
+            ->where(" sort_tag_groups.id IN (" . join(',', $group_ids) . ")")
+            ->asArray()
+            ->all();
+
+        foreach ($model_groups as $item) {
+            $array[$item['id']] = ['name' => $item['name'], 'items' => []];
+            foreach ($model as $_item) {
+                if ($item['id'] == $_item['sort_tag_group_id']) {
+                    $checked = 0;
+                    $array[$item['id']]['items'][] = ['id' => $_item['id'], 'name' => $_item['name'], 'checked' => $checked];
+                }
+
+            }
+        }
+
+        return $array;
     }
 
 }
