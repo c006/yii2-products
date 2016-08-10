@@ -440,10 +440,11 @@ class ProdHelpers
 
     /**
      * @param $category_id
-     *
-     * @return mixed
+     * @param array $sort_tags
+     * @param bool $is_raw
+     * @return $this|array|string|\yii\db\ActiveRecord[]|\yii\db\Query
      */
-    static public function getCategoryProducts($category_id, $sort_tags = [])
+    static public function getCategoryProducts($category_id, $sort_tags = [], $is_raw = FALSE)
     {
 
         $model = Product::find()
@@ -462,6 +463,10 @@ class ProdHelpers
             foreach ($sort_tags as $index => $item) {
                 $model = $model->innerJoin('product_tag _pt' . $index, "_pt" . $index . ".product_id = product.id AND _pt" . $index . ".tag_id = " . $item . " ");
             }
+        }
+
+        if ($is_raw) {
+            return $model->createCommand()->getRawSql();
         }
 
         $model = $model->asArray()->all();

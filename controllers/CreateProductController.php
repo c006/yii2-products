@@ -88,18 +88,18 @@ class CreateProductController extends Controller
                     $image = new ImageHelper(FALSE);
                     $image->imageSet($model_product->id, $_FILES['ComponentImage']);
                 }
+
                 /* Categories */
                 if (isset($_POST['Category'])) {
                     foreach ($_POST['Category'] as $category_id) {
                         ProdHelpers::saveProductCategories($model_product->id, $category_id);
                     }
                 }
+
                 /* Tags */
-                if (isset($_POST['Tags'])) {
-                    foreach ($_POST['Tags'] as $pos => $_array) {
-                        foreach ($_array as $null => $tag_id) {
-                            ProdHelpers::saveProductTags($model_product->id, $tag_id, $pos);
-                        }
+                if (isset($_POST['SortTag'])) {
+                    foreach ($_POST['SortTag'] as $tag_id => $_array) {
+                        ProdHelpers::saveProductTags($model_product->id, $tag_id, 0);
                     }
                 }
                 /* Auto Ship */
@@ -131,6 +131,7 @@ class CreateProductController extends Controller
 
                     ProdHelpers::saveProductUrl($model_product->id, $_POST['ComponentProductUrl']['product_url']);
                 }
+
                 /* Packaging */
                 if (isset($_POST['Packaging'])) {
                     foreach ($_POST['Packaging'] as $pos => $_array) {
@@ -151,7 +152,7 @@ class CreateProductController extends Controller
                     Alerts::setCountdown(10);
                 }
 
-                return $this->redirect(['index']);
+                return $this->redirect('/products');
             }
 
 
