@@ -159,6 +159,13 @@ class IndexController extends Controller
                 ProdHelpers::saveProductUrl($model_product->id, $_POST['ComponentProductUrl']['product_url']);
             }
 
+
+            /* Shipping Address */
+            if (isset($_POST['ShippingAddresses'])) {
+                ProdHelpers::saveProductShippingAddress($model_product->id, $_POST['ShippingAddresses']['id']);
+            }
+
+
             /* Packaging */
             if (isset($_POST['Packaging'])) {
                 foreach ($_POST['Packaging'] as $pos => $_array) {

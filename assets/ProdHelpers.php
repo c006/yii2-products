@@ -14,6 +14,7 @@ use c006\products\models\ProductCategory;
 use c006\products\models\ProductImage;
 use c006\products\models\ProductPackaging;
 use c006\products\models\ProductPriceTier;
+use c006\products\models\ProductShippingAddress;
 use c006\products\models\ProductTag;
 use c006\products\models\ProductValueUrl;
 use c006\products\models\search\PriceTierLink;
@@ -167,6 +168,28 @@ class ProdHelpers
             ];
             ModelHelper::saveModelForm('c006\products\models\ProductPackaging', $model);
         }
+    }
+
+    /**
+     * @param $product_id
+     * @param $shipping_address_id
+     */
+    static public function saveProductShippingAddress($product_id, $shipping_address_id)
+    {
+        $model = ProductShippingAddress::find()
+            ->where(['product_id' => $product_id])
+            ->asArray()
+            ->one();
+        if (sizeof($model) == 0) {
+            $model = [
+                'product_id'          => $product_id,
+                'shipping_address_id' => $shipping_address_id,
+            ];
+
+        } else {
+            $model['shipping_address_id'] = $shipping_address_id;
+        }
+        ModelHelper::saveModelForm('c006\products\models\ProductShippingAddress', $model);
     }
 
 
@@ -636,6 +659,20 @@ class ProdHelpers
         }
 
         return $array;
+    }
+
+    /**
+     * @param $product_id
+     * @return int
+     */
+    static public function getShippingAddress($product_id)
+    {
+        $model = ProductShippingAddress::find()
+            ->where(['product_id' => $product_id])
+            ->asArray()
+            ->one();
+
+        return (sizeof($model)) ? $model['shipping_address_id'] : 0;
     }
 
 }
