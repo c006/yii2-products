@@ -441,10 +441,11 @@ class ProdHelpers
     /**
      * @param $category_id
      * @param array $sort_tags
+     * @param string $search
      * @param bool $is_raw
-     * @return $this|array|string|\yii\db\ActiveRecord[]|\yii\db\Query
+     * @return $this|string|\yii\db\Query
      */
-    static public function getCategoryProducts($category_id, $sort_tags = [], $is_raw = FALSE)
+    static public function getCategoryProducts($category_id, $sort_tags = [], $search = '', $is_raw = FALSE)
     {
 
         $model = Product::find()
@@ -465,6 +466,14 @@ class ProdHelpers
             }
         }
 
+        if ($search) {
+            $sql = " _search.product_id = product.id AND (";
+            foreach ([1, 7, 34] as $index => $item) {
+                $sql .= "( _search.attr_id = " . $item . " AND UPPER(_search.value) LIKE('%" . addslashes(str_replace(' ', '%', $search)) . "%') ) OR ";
+            }
+            $model = $model->innerJoin('product_value_text _search', substr($sql, 0, strlen($sql) - 3) . ")");
+        }
+
         if ($is_raw) {
             return $model->createCommand()->getRawSql();
         }
@@ -475,17 +484,27 @@ class ProdHelpers
     }
 
     /**
-     * @param $category_id
-     * @return string
+     * @param int $id
+     * @param string $url
+     * @return array|bool|null|\yii\db\ActiveRecord
      */
-    static public function getCategoryName($category_id)
+    static public function getCategory($id = 0, $url = '')
     {
-        $model = Category::find()
-            ->where(['id' => $category_id])
-            ->asArray()
-            ->one();
+        if (!$url && !$id) {
+            $url = explode('/', preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']));
+            $url = $url[sizeof($url) - 1];
+        }
 
-        return (sizeof($model)) ? $model['name'] : 'NO';
+        $model = Category::find();
+        if ($id) {
+            $model = $model->where(['id' => $id]);
+        } else {
+            $model = $model->where(['url' => $url]);
+        }
+
+        $model = $model->asArray()->one();
+
+        return (sizeof($model)) ? $model : FALSE;
     }
 
 
