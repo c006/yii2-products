@@ -441,6 +441,20 @@ class m000000_000000_c006_products extends Migration
             }
         }
 
+        /* MYSQL */
+        if (!in_array('product_value_url', $tables)) {
+            if ($dbType == "mysql") {
+                $this->createTable('{{%product_value_url}}', [
+                    'id'           => 'INT(10) UNSIGNED NOT NULL AUTO_INCREMENT',
+                    0              => 'PRIMARY KEY (`id`)',
+                    'product_id'   => 'INT(10) UNSIGNED NOT NULL',
+                    'alias_url_id' => 'INT(10) NOT NULL',
+                    'attr_id'      => 'INT(10) NOT NULL DEFAULT \'3\'',
+                    'value'        => 'VARCHAR(100) NOT NULL',
+                ], $tableOptions_mysql);
+            }
+        }
+
         $this->createIndex('idx_product_type_id_0317_00', 'product', 'product_type_id', 0);
         $this->createIndex('idx_UNIQUE_name_0345_01', 'product_attr', 'name', 1);
         $this->createIndex('idx_attr_type_id_0345_02', 'product_attr', 'attr_type_id', 0);
@@ -481,6 +495,7 @@ class m000000_000000_c006_products extends Migration
         $this->createIndex('idx_product_id_0924_37', 'product_value_url', 'product_id', 0);
         $this->createIndex('idx_auto_ship_id_4818_00', 'auto_ship_link', 'auto_ship_id', 0);
         $this->createIndex('idx_price_tier_id_0974_00', 'price_tier_link', 'price_tier_id', 0);
+        $this->createIndex('idx_product_id_1713_00', 'product_value_url', 'product_id', 0);
 
         $this->execute('SET foreign_key_checks = 0');
         $this->addForeignKey('fk_product_type_0313_00', '{{%product}}', 'product_type_id', '{{%product_type}}', 'id', 'CASCADE', 'NO ACTION');
@@ -516,6 +531,7 @@ class m000000_000000_c006_products extends Migration
         $this->addForeignKey('fk_product_0921_030', '{{%product_value_url}}', 'product_id', '{{%product}}', 'id', 'CASCADE', 'NO ACTION');
         $this->addForeignKey('fk_auto_ship_4814_00', '{{%auto_ship_link}}', 'auto_ship_id', '{{%auto_ship}}', 'id', 'CASCADE', 'NO ACTION');
         $this->addForeignKey('fk_price_tier_0969_00', '{{%price_tier_link}}', 'price_tier_id', '{{%price_tier}}', 'id', 'CASCADE', 'NO ACTION');
+        $this->addForeignKey('fk_product_003_00', '{{%product_value_url}}', 'product_id', '{{%product}}', 'id', 'CASCADE', 'NO ACTION');
         $this->execute('SET foreign_key_checks = 1;');
 
         $this->execute('SET foreign_key_checks = 0');
@@ -786,6 +802,9 @@ class m000000_000000_c006_products extends Migration
         $this->execute('SET foreign_key_checks = 1;');
         $this->execute('SET foreign_key_checks = 0');
         $this->execute('DROP TABLE IF EXISTS `tags`');
+        $this->execute('SET foreign_key_checks = 1;');
+        $this->execute('SET foreign_key_checks = 0');
+        $this->execute('DROP TABLE IF EXISTS `product_value_url`');
         $this->execute('SET foreign_key_checks = 1;');
     }
 }
